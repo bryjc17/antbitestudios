@@ -16,8 +16,6 @@
       font-family: 'Poppins', sans-serif;
       line-height: 1.6;
       color: #f5b500;
-      background: url('https://imgur.com/QXBebSz.png') no-repeat center center fixed;
-      background-size: cover;
       overflow-x: hidden;
     }
     a {
@@ -73,13 +71,29 @@
       text-align: center;
       color: #f5b500;
       padding: 0 1rem;
-      text-shadow: 0 0 8px rgba(0, 0, 0, 0.9);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero video {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      min-width: 100%;
+      min-height: 100%;
+      width: auto;
+      height: auto;
+      z-index: 1;
+      opacity: 0.5; /* Adjust opacity to blend with text  */
+      transform: translate(-50%, -50%);
     }
     .hero h2 {
       font-size: 48px;
       margin-bottom: 20px;
       max-width: 900px;
       line-height: 1.1;
+      position: relative;
+      z-index: 2; /* Ensure text is above video */
+      text-shadow: 0 0 8px rgba(0, 0, 0, 0.9);
     }
     .cta-button {
       position: fixed;
@@ -171,7 +185,8 @@
       gap: 25px;
       margin-top: 40px;
       max-width: 900px;
-      margin: 0 auto;
+      margin-left: auto;
+      margin-right: auto;
     }
     #objectives li {
       background: #333;
@@ -190,9 +205,10 @@
       gap: 30px;
       margin-top: 40px;
       max-width: 1100px;
-      margin: auto;
+      margin-left: auto;
+      margin-right: auto;
     }
-    .team-member {
+    .team-profiles > div {
       background: #333;
       padding: 30px 20px;
       border-radius: 15px;
@@ -204,9 +220,8 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      transition: transform 0.3s;
     }
-    .team-member img {
+    .team-profiles img {
       width: 120px;
       height: 120px;
       border-radius: 50%;
@@ -214,13 +229,13 @@
       margin-bottom: 15px;
       box-shadow: 0 0 15px rgba(245, 181, 0, 0.8);
     }
-    .team-member h3 {
+    .team-profiles h3 {
       color: #f5b500;
       margin-bottom: 8px;
       font-size: 1.5rem;
       font-weight: 700;
     }
-    .team-member p {
+    .team-profiles p {
       font-weight: 400;
       font-size: 1.1rem;
       max-width: 250px;
@@ -233,6 +248,21 @@
       margin-top: 60px;
       font-size: 0.9rem;
       user-select: none;
+    }
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 20px;
+    }
+    .social-icons img {
+      width: 30px; /* Set icon size */
+      height: auto;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+    .social-icons img:hover {
+      transform: scale(1.1);
     }
     @media (max-width: 768px) {
       .hero h2 {
@@ -252,11 +282,9 @@
       .service-cards, #objectives ul, .team-profiles {
         grid-template-columns: 1fr;
       }
-      .team-member {
-        transition: transform 0.3s;
-      }
-      .team-member:hover {
-        transform: scale(1.05);
+      .team-profiles > div {
+        max-width: 320px;
+        margin: 0 auto;
       }
     }
   </style>
@@ -264,7 +292,7 @@
 <body>
 
   <nav>
-    <img src="C:\Users\Brian Justine Cuenca\OneDrive\Desktop\Logo black text.png" alt="AntBite Studios Logo" />
+    <img src="C:\Users\Brian Justine Cuenca\Downloads\Logo black text.png" alt="AntBite Studios Logo" />
     <ul>
       <li><a href="#about">About</a></li>
       <li><a href="#vision">Vision & Mission</a></li>
@@ -275,22 +303,18 @@
   </nav>
 
   <header class="hero">
-    <h2></h2>
+    <video autoplay loop muted>
+      <source src="c:\Users\Brian Justine Cuenca\Downloads\FDownloader.Net_AQNiftMnfeRxTKNQHVdoPF15wulb4hqypL7ar84SkykQ_Lb1KaaJq0jsgh2OS1I61E_7LW5N-2l7eZkCW4g-ajOL_720p_(HD).mp4" type="video/mp4"> <!-- Replace with your video file path -->
+      Your browser does not support HTML5 video.
+    </video>
+    <h2></h2> <!-- Add a slogan for your biz -->
   </header>
 
   <a href="#footer-contact" class="cta-button">Contact Us</a>
 
   <section id="about">
     <h2>About Us</h2>
-    <p>AntBite is a bold, dynamic creative agency with a focus on high-impact
-visuals and storytelling. We specialize in videos, photography, and
-omnichannel marketing strategies that bring your business to life and
-connect with your audience on a visceral level. Much like ants—small but
-mighty—we’re agile, organized, and relentless in our pursuit of results.
-
-Whether it's a compelling promo video, eye-catching product photography,
-or a full-spectrum marketing campaign, we’re here to take a bite out
-of the noise and make your brand impossible to ignore.</p>
+    <p>AntBite is a bold, dynamic creative agency with a focus on high-impact visuals and storytelling. We specialize in videos, photography, and omnichannel marketing strategies that bring your business to life and connect with your audience on a visceral level. Much like ants—small but mighty—we’re agile, organized, and relentless in our pursuit of results.</p>
   </section>
 
   <section id="vision">
@@ -298,7 +322,7 @@ of the noise and make your brand impossible to ignore.</p>
     <div class="vision-mission" style="display:flex;justify-content:center;gap:40px;flex-wrap:wrap;">
       <div style="max-width:450px;">
         <h3>Vision</h3>
-        <p>To become a leading force in creative media that demands smart and impactful marketing for businesses of all sizes — blending storytelling strategy, and striking visuals to build lasting impressions and measurable success.</p>
+        <p>To become a leading force in creative media that demand smart and impactful marketing for businesses of all sizes — blending storytelling strategy, and striking visuals to build lasting impressions and measurable success.</p>
       </div>
       <div style="max-width:450px;">
         <h3>Mission</h3>
@@ -309,7 +333,7 @@ of the noise and make your brand impossible to ignore.</p>
 
   <section id="services">
     <h2>Our Services</h2>
-    <div class="service-cards">
+    <div class="service-cards" style="max-width: 700px; margin: 0 auto;">
       <div class="card">
         <h3>Digital</h3>
         <p>Campaign Development, Social Media Ads, Marketing Graphics</p>
@@ -344,42 +368,46 @@ of the noise and make your brand impossible to ignore.</p>
   <section id="team">
     <h2>Meet the Team</h2>
     <div class="team-profiles">
-      <div class="team-member">
+      <div>
         <img src="C:\Users\Brian Justine Cuenca\Downloads\Untitled design (12).png" alt="Francis Adarlo" />
         <h3>Francis Adarlo</h3>
         <p>Founder, Creative Director</p>
       </div>
-      <div class="team-member">
+      <div>
         <img src="C:\Users\Brian Justine Cuenca\Downloads\Untitled design (13).png" alt="Shane Gayoma" />
         <h3>Shane Gayoma</h3>
         <p>Chief Operating Officer</p>
       </div>
-      <div class="team-member">
+      <div>
         <img src="C:\Users\Brian Justine Cuenca\Downloads\Untitled design (8).png" alt="Lloyd Mendoza" />
         <h3>Lloyd Mendoza</h3>
         <p>Account Manager</p>
       </div>
-      <div class="team-member">
+      <div>
         <img src="C:\Users\Brian Justine Cuenca\Downloads\Untitled design (10).png" alt="Reign Ecleo" />
         <h3>Reign Ecleo</h3>
         <p>Copywriter, Social Media Specialist</p>
       </div>
-      <div class="team-member">
+      <div>
         <img src="C:\Users\Brian Justine Cuenca\Downloads\Untitled design (11).png" alt="Diandra Manimtim" />
         <h3>Diandra Manimtim</h3>
         <p>Marketing Manager</p>
       </div>
-      <div class="team-member">
-        <img src="C:\Users\Brian Justine Cuenca\Downloads\Untitled design (15).png"alt="Ralph Dave Soliman" />
+      <div>
+        <img src="C:\Users\Brian Justine Cuenca\Downloads\Untitled design (15).png" alt="Ralph Dave Soliman" />
         <h3>Ralph Dave Soliman</h3>
         <p>Video Production Specialist</p>
       </div>
-      <div class="team-member">
+      <div>
         <img src="C:\Users\Brian Justine Cuenca\Downloads\Untitled design (16).png" alt="Janssen Garin" />
-        <h3>Janssen Garin</h3>
+        <h3>
+          <a href="https://web.facebook.com/breniee.deleon/about" target="_blank" style="color: #f5b500; text-decoration: underline;">
+            Janssen Garin
+          </a>
+        </h3>
         <p>Photographer, Multimedia Designer</p>
       </div>
-      <div class="team-member">
+      <div>
         <img src="C:\Users\Brian Justine Cuenca\Downloads\Untitled design (14).png" alt="Karla Lois Amihan" />
         <h3>Karla Lois Amihan</h3>
         <p>Art Director</p>
@@ -388,7 +416,21 @@ of the noise and make your brand impossible to ignore.</p>
   </section>
 
   <footer id="footer-contact">
-    <p>Follow us on social media: <a href="https://www.facebook.com/profile.php?id=61575726695454">Facebook</a></p>
+    <p>Follow us on social media:</p>
+    <div class="social-icons">
+      <a href="https://www.facebook.com/profile.php?id=61575726695454" target="_blank">
+        <img src="C:\Users\Brian Justine Cuenca\Downloads\download.jpg" alt="Facebook" />
+      </a>
+      <a href="https://www.instagram.com/antbite.studios/" target="_blank">
+        <img src="C:\Users\Brian Justine Cuenca\Downloads\download (1).jpg" alt="Instagram" />
+      </a>
+      <a href="https://www.tiktok.com/@antbite.studios" target="_blank">
+        <img src="C:\Users\Brian Justine Cuenca\Downloads\download.png" alt="TikTok" />
+      </a>
+      <a href="https://www.youtube.com/@AntbiteStudios" target="_blank">
+        <img src="C:\Users\Brian Justine Cuenca\Downloads\YouTube-Logo-PNG-Symbol-for-Video-Platform-Transparent-jpg.webp" alt="YouTube" />
+      </a>
+    </div>
     <p>Contact us: antbitestudios.com | 0962-557-0863</p>
     <p>&copy; 2025 AntBite Studios. All rights reserved.</p>
   </footer>
