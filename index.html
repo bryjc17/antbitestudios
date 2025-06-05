@@ -62,6 +62,31 @@
       background: #444;
       color: #f5b500;
     }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+    .hamburger div {
+      width: 25px;
+      height: 3px;
+      background-color: #f5b500;
+      margin: 4px 0;
+      transition: 0.3s;
+    }
+    .nav-links {
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 60px;
+      right: 20px;
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      border-radius: 5px;
+    }
+    .nav-links.active {
+      display: flex;
+    }
     .hero {
       height: 100vh;
       display: flex;
@@ -286,14 +311,22 @@
         max-width: 320px;
         margin: 0 auto;
       }
+      .hamburger {
+        display: flex;
+      }
     }
   </style>
 </head>
 <body>
 
   <nav>
-    <img src="C:\Users\Brian Justine Cuenca\Downloads\Logo black text.png" alt="AntBite Studios Logo" />
-    <ul>
+    <img src="Logo black text.png" alt="AntBite Studios Logo" />
+    <div class="hamburger" id="hamburger">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <ul class="nav-links" id="nav-links">
       <li><a href="#about">About</a></li>
       <li><a href="#vision">Vision & Mission</a></li>
       <li><a href="#services">Services</a></li>
@@ -304,7 +337,7 @@
 
   <header class="hero">
     <video autoplay loop muted>
-      <source src="c:\Users\Brian Justine Cuenca\Downloads\FDownloader.Net_AQNiftMnfeRxTKNQHVdoPF15wulb4hqypL7ar84SkykQ_Lb1KaaJq0jsgh2OS1I61E_7LW5N-2l7eZkCW4g-ajOL_720p_(HD).mp4" type="video/mp4"> <!-- Replace with your video file path -->
+      <source src="FDownloader.Net_AQNiftMnfeRxTKNQHVdoPF15wulb4hqypL7ar84SkykQ_Lb1KaaJq0jsgh2OS1I61E_7LW5N-2l7eZkCW4g-ajOL_720p_(HD).mp4" type="video/mp4"> <!-- Replace with your video file path -->
       Your browser does not support HTML5 video.
     </video>
     <h2></h2> <!-- Add a slogan for your biz -->
@@ -369,37 +402,37 @@
     <h2>Meet the Team</h2>
     <div class="team-profiles">
       <div>
-        <img src="C:\Users\Brian Justine Cuenca\Downloads\Untitled design (12).png" alt="Francis Adarlo" />
+        <img src="Untitled design (12).png" alt="Francis Adarlo" />
         <h3>Francis Adarlo</h3>
         <p>Founder, Creative Director</p>
       </div>
       <div>
-        <img src="C:\Users\Brian Justine Cuenca\Downloads\Untitled design (13).png" alt="Shane Gayoma" />
+        <img src="Untitled design (13).png" alt="Shane Gayoma" />
         <h3>Shane Gayoma</h3>
         <p>Chief Operating Officer</p>
       </div>
       <div>
-        <img src="C:\Users\Brian Justine Cuenca\Downloads\Untitled design (8).png" alt="Lloyd Mendoza" />
+        <img src="Untitled design (8).png" alt="Lloyd Mendoza" />
         <h3>Lloyd Mendoza</h3>
         <p>Account Manager</p>
       </div>
       <div>
-        <img src="C:\Users\Brian Justine Cuenca\Downloads\Untitled design (10).png" alt="Reign Ecleo" />
+        <img src="Untitled design (10).png" alt="Reign Ecleo" />
         <h3>Reign Ecleo</h3>
         <p>Copywriter, Social Media Specialist</p>
       </div>
       <div>
-        <img src="C:\Users\Brian Justine Cuenca\Downloads\Untitled design (11).png" alt="Diandra Manimtim" />
+        <img src="Untitled design (11).png" alt="Diandra Manimtim" />
         <h3>Diandra Manimtim</h3>
         <p>Marketing Manager</p>
       </div>
       <div>
-        <img src="C:\Users\Brian Justine Cuenca\Downloads\Untitled design (15).png" alt="Ralph Dave Soliman" />
+        <img src="Untitled design (15).png" alt="Ralph Dave Soliman" />
         <h3>Ralph Dave Soliman</h3>
         <p>Video Production Specialist</p>
       </div>
       <div>
-        <img src="C:\Users\Brian Justine Cuenca\Downloads\Untitled design (16).png" alt="Janssen Garin" />
+        <img src="Untitled design (16).png" alt="Janssen Garin" />
         <h3>
           <a href="https://web.facebook.com/breniee.deleon/about" target="_blank" style="color: #f5b500; text-decoration: underline;">
             Janssen Garin
@@ -408,9 +441,14 @@
         <p>Photographer, Multimedia Designer</p>
       </div>
       <div>
-        <img src="C:\Users\Brian Justine Cuenca\Downloads\Untitled design (14).png" alt="Karla Lois Amihan" />
+        <img src="Untitled design (14).png" alt="Karla Lois Amihan" />
         <h3>Karla Lois Amihan</h3>
         <p>Art Director</p>
+      </div>
+      <div>
+        <img src="C:\Users\Brian Justine Cuenca\Downloads\Untitled design (17).png" alt="Brian Justine Cuenca" /> <!-- Add the image for Brian Justine Cuenca -->
+        <h3>Brian Justine Cuenca</h3>
+        <p>UI/UX Designer and Developer</p>
       </div>
     </div>
   </section>
@@ -419,16 +457,16 @@
     <p>Follow us on social media:</p>
     <div class="social-icons">
       <a href="https://www.facebook.com/profile.php?id=61575726695454" target="_blank">
-        <img src="C:\Users\Brian Justine Cuenca\Downloads\download.jpg" alt="Facebook" />
+        <img src="download.jpg" alt="Facebook" />
       </a>
       <a href="https://www.instagram.com/antbite.studios/" target="_blank">
-        <img src="C:\Users\Brian Justine Cuenca\Downloads\download (1).jpg" alt="Instagram" />
+        <img src="C:\Users\Brian Justine Cuenca\Downloads\Untitled design (18).png" alt="Instagram" />
       </a>
       <a href="https://www.tiktok.com/@antbite.studios" target="_blank">
-        <img src="C:\Users\Brian Justine Cuenca\Downloads\download.png" alt="TikTok" />
+        <img src="download.png" alt="TikTok" />
       </a>
       <a href="https://www.youtube.com/@AntbiteStudios" target="_blank">
-        <img src="C:\Users\Brian Justine Cuenca\Downloads\YouTube-Logo-PNG-Symbol-for-Video-Platform-Transparent-jpg.webp" alt="YouTube" />
+        <img src="YouTube-Logo-PNG-Symbol-for-Video-Platform-Transparent-jpg.webp" alt="YouTube" />
       </a>
     </div>
     <p>Contact us: antbitestudios.com | 0962-557-0863</p>
