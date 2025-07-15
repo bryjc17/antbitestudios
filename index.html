@@ -812,12 +812,12 @@
             displayError("Firebase initialization failed. Booking features may be limited.");
         }
 
-        // Services available for booking
+        // Services available for booking (adjusted names to match your h3 titles)
         const services = [
-            { id: 'digital', name: 'Digital Marketing', price: 150 },
-            { id: 'traditional', name: 'Traditional Marketing', price: 250 },
-            { id: 'media', name: 'Media Planning', price: 200 },
-            { id: 'branding', name: 'Branding Consultation', price: 100 },
+            { id: 'digital', name: 'Digital', price: 150 },
+            { id: 'traditional', name: 'Traditional', price: 250 },
+            { id: 'media', name: 'Media', price: 200 },
+            { id: 'branding', name: 'Branding', price: 100 },
         ];
 
         // DOM elements for the booking section
@@ -842,9 +842,10 @@
             services.forEach(s => {
                 const option = document.createElement('option');
                 option.value = s.id;
-                option.textContent = `${s.name} - $${s.price}`;
+                option.textContent = `${s.name} - $${s.price}`; // This is what populates the dropdown
                 serviceSelect.appendChild(option);
             });
+            console.log("Services populated in dropdown."); // Added for debugging
         }
 
         // Display error message
