@@ -684,30 +684,53 @@
 
     <!-- Booking System Section -->
     <section id="booking-section" class="bg-antbite-light-dark text-antbite-yellow max-w-4xl w-full my-8 mx-auto p-8 md:p-10 lg:p-12 shadow-2xl rounded-xl">
-        <h2 class="text-4xl md:text-5xl font-extrabold text-center mb-8">
-            Book Your Service
-        </h2>
+    <h2 class="text-4xl md:text-5xl font-extrabold text-center mb-8">
+        Book Your Service
+    </h2>
 
-        <div id="error-message" class="hidden bg-red-800 border border-red-600 text-red-200 px-4 py-3 rounded-md relative mb-6" role="alert">
-            <strong class="font-bold">Error!</strong>
-            <span id="error-text" class="block sm:inline"></span>
-        </div>
+    <div id="error-message" class="hidden bg-red-800 border border-red-600 text-red-200 px-4 py-3 rounded-md relative mb-6" role="alert">
+        <strong class="font-bold">Error!</strong>
+        <span id="error-text" class="block sm:inline"></span>
+    </div>
 
-        <form id="booking-form" class="space-y-6">
-            <!-- Service Selection -->
-            <div>
-                <label for="service" class="block text-lg font-medium text-gray-300 mb-2">
-                    Select Service
-                </label>
-                <select
-                    id="service"
-                    name="service"
-                    class="mt-1 block w-full pl-3 pr-10 py-3 text-base bg-gray-700 text-gray-200 border-gray-600 focus:outline-none focus:ring-antbite-yellow focus:border-antbite-yellow sm:text-lg rounded-md shadow-sm transition duration-150 ease-in-out"
-                    required
-                >
-                    <option value="">-- Choose a service --</option>
-                    <!-- Options will be populated by JavaScript -->
-                </select>
+    <form id="booking-form" class="space-y-6">
+        <div>
+            <label for="service" class="block text-lg font-medium text-gray-300 mb-2">
+                Select Service
+            </label>
+            <select
+                id="service"
+                name="service"
+                class="mt-1 block w-full pl-3 pr-10 py-3 text-base bg-gray-700 text-gray-200 border-gray-600 focus:outline-none focus:ring-antbite-yellow focus:border-antbite-yellow sm:text-lg rounded-md shadow-sm transition duration-150 ease-in-out"
+                required
+            >
+                <option value="">-- Choose a service --</option>
+
+                <optgroup label="Print Services">
+                    <option value="business-cards">Business Card Design & Print</option>
+                    <option value="flyers-brochures">Flyer & Brochure Design & Print</option>
+                    <option value="stickers-labels">Sticker & Label Printing</option>
+                    <option value="posters-banners">Poster & Banner Printing</option>
+                    <option value="letterheads-envelopes">Letterhead & Envelope Printing</option>
+                    <option value="merchandise-printing">Customized Merchandise Printing</option>
+                    <option value="large-format-printing">Large Format Printing</option>
+                    <option value="invitation-design">Invitation Design & Print</option>
+                    <option value="packaging-design">Packaging Design & Print</option>
+                </optgroup>
+
+                <optgroup label="Craft & Creative Services">
+                    <option value="logo-design">Logo Design & Branding Packages</option>
+                    <option value="social-media-graphics">Graphic Design for Social Media</option>
+                    <option value="custom-illustration">Custom Illustration & Artwork</option>
+                    <option value="custom-decals">Custom Decals & Vinyl Cutting</option>
+                    <option value="personalized-gifts">Personalized Gifts & Decor</option>
+                    <option value="engraving-services">Engraving Services</option>
+                    <option value="fabric-printing">Fabric Printing & Custom Apparel</option>
+                    <option value="creative-consultation">Creative Project Consultation</option>
+                </optgroup>
+            </select>
+        </div> </form>
+</section>
             </div>
 
             <!-- Date and Time Selection -->
