@@ -1,597 +1,1067 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AntBite Studios</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      scroll-behavior: smooth;
-    }
-    body {
-      font-family: 'Poppins', sans-serif;
-      line-height: 1.6;
-      color: #f5b500; /* Main text color for contrast */
-      overflow-x: hidden;
-      background-color: #222; /* Dark background for the overall page */
-    }
-    a {
-      color: #f5b500;
-      text-decoration: none;
-    }
-    h1, h2, h3 {
-      font-weight: 700;
-      color: #f5b500;
-    }
-    p {
-      font-weight: 300;
-      color: #f5b500;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AntBite Studios</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        // Poppins is set in the main CSS, but keeping 'inter' available for specific elements if needed.
+                        inter: ['Inter', 'sans-serif'],
+                        poppins: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        // Define your accent color for easier use in Tailwind classes
+                        'antbite-yellow': '#f5b500',
+                        'antbite-dark': '#222',
+                        'antbite-medium': '#333',
+                        'antbite-light-dark': '#262626', // rgba(38, 38, 38, 0.85) is close to this
+                    }
+                },
+            },
+        };
+    </script>
+    <style>
+        /* Custom styles from your original code */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Poppins', sans-serif; /* Main font set here */
+            line-height: 1.6;
+            color: #f5b500; /* Main text color for contrast */
+            overflow-x: hidden;
+            background-color: #222; /* Dark background for the overall page */
+        }
+        a {
+            color: #f5b500;
+            text-decoration: none;
+        }
+        h1, h2, h3 {
+            font-weight: 700;
+            color: #f5b500;
+        }
+        p {
+            font-weight: 300;
+            color: #f5b500;
+        }
 
-    /* Navigation Bar */
-    nav {
-  position: fixed;
-  width: 100%;
-  background: rgba(255, 255, 255, 0.2); /* This is the key line */
-  padding: 1rem 2rem;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  backdrop-filter: saturate(180%) blur(10px);
-    }
-    nav img {
-      height: 40px;
-      max-width: 160px;
-      object-fit: contain;
-    }
-    nav ul {
-      list-style: none;
-      display: flex;
-      gap: 20px;
-    }
-    nav ul li a {
-      padding: 10px 15px;
-      border-radius: 5px;
-      transition: background 0.3s;
-      font-weight: 600;
-      color: #333; /* Darker text for navigation links */
-    }
-    nav ul li a:hover {
-      background: #444;
-      color: #f5b500;
-    }
+        /* Navigation Bar */
+        nav {
+            position: fixed;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.2); /* This is the key line */
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: saturate(180%) blur(10px);
+        }
+        nav img {
+            height: 40px;
+            max-width: 160px;
+            object-fit: contain;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+        nav ul li a {
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background 0.3s;
+            font-weight: 600;
+            color: #333; /* Darker text for navigation links */
+        }
+        nav ul li a:hover {
+            background: #444;
+            color: #f5b500;
+        }
 
-    /* Hero Section */
-    .hero {
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      color: #f5b500;
-      padding: 0 1rem;
-      position: relative;
-      overflow: hidden;
-      /* Original background image path */
-      background-image: url("495169740_122100239480857556_953647874393082750_n.jpg"); 
-      background-size: cover;
-      background-position: center;
-    }
-    .hero h2 {
-      font-size: 48px;
-      margin-bottom: 20px;
-      max-width: 900px;
-      line-height: 1.1;
-      position: relative;
-      z-index: 2; /* Ensure text is above any potential video overlay */
-      text-shadow: 0 0 8px rgba(0, 0, 0, 0.9);
-    }
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #f5b500;
+            padding: 0 1rem;
+            position: relative;
+            overflow: hidden;
+            /* Original background image path */
+            background-image: url("495169740_122100239480857556_953647874393082750_n.jpg");
+            background-size: cover;
+            background-position: center;
+        }
+        .hero h2 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            max-width: 900px;
+            line-height: 1.1;
+            position: relative;
+            z-index: 2; /* Ensure text is above any potential video overlay */
+            text-shadow: 0 0 8px rgba(0, 0, 0, 0.9);
+        }
 
-    /* Call to Action Button */
-    .cta-button {
-      position: fixed;
-      right: 30px;
-      bottom: 30px;
-      z-index: 2000;
-      background-color: #444;
-      color: #f5b500;
-      padding: 15px 40px;
-      border-radius: 30px;
-      font-weight: bold;
-      font-size: 1.2rem;
-      transition: background 0.3s, transform 0.2s;
-      box-shadow: 0 0 10px rgba(245, 181, 0, 0.7);
-      border: none;
-      cursor: pointer;
-      user-select: none;
-      text-align: center;
-    }
-    .cta-button:hover {
-      background-color: #111;
-      color: #f5b500;
-      transform: scale(1.05);
-      box-shadow: 0 0 20px rgba(245, 181, 0, 0.9);
-    }
+        /* Call to Action Button */
+        .cta-button {
+            position: fixed;
+            right: 30px;
+            bottom: 30px;
+            z-index: 2000;
+            background-color: #444;
+            color: #f5b500;
+            padding: 15px 40px;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: background 0.3s, transform 0.2s;
+            box-shadow: 0 0 10px rgba(245, 181, 0, 0.7);
+            border: none;
+            cursor: pointer;
+            user-select: none;
+            text-align: center;
+        }
+        .cta-button:hover {
+            background-color: #111;
+            color: #f5b500;
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(245, 181, 0, 0.9);
+        }
 
-    /* Section Styling (About, Vision, Services, Objectives, Portfolio, Team) */
-    section {
-      padding: 80px 20px;
-      text-align: center;
-      background: rgba(38, 38, 38, 0.85); /* Dark semi-transparent background */
-      max-width: 1200px;
-      margin: 0 auto 60px auto; /* Centered with bottom margin */
-      border-radius: 12px;
-      box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
-    }
-    section h2 {
-      font-size: 36px;
-      margin-bottom: 20px;
-      position: relative;
-      font-weight: 700;
-    }
-    section h2::after {
-      content: "";
-      display: block;
-      margin: 10px auto;
-      width: 80px;
-      height: 4px;
-      background-color: #f5b500; /* Accent color underline */
-      border-radius: 2px;
-    }
-    section p {
-      max-width: 800px;
-      margin: 0 auto;
-      font-size: 18px;
-    }
+        /* New Floating Button */
+        .next-page-button {
+            position: fixed;
+            right: 30px;
+            bottom: 90px; /* Position above the contact button */
+            z-index: 2000;
+            background-color: #444;
+            color: #f5b500;
+            padding: 15px 40px;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: background 0.3s, transform 0.2s;
+            box-shadow: 0 0 10px rgba(245, 181, 0, 0.7);
+            border: none;
+            cursor: pointer;
+            user-select: none;
+            text-align: center;
+        }
+        .next-page-button:hover {
+            background-color: #111;
+            color: #f5b500;
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(245, 181, 0, 0.9);
+        }
 
-    /* Vision & Mission Specific */
-    .vision-mission {
-      display: flex;
-      justify-content: center;
-      gap: 40px;
-      flex-wrap: wrap;
-    }
-    .vision-mission > div {
-      max-width: 450px;
-      background: #333;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-    .vision-mission > div:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 14px 25px rgba(245, 181, 0, 0.8);
-    }
-    .vision-mission h3 {
-      margin-bottom: 15px;
-    }
 
-    /* Service Cards */
-    .service-cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 30px;
-      margin-top: 40px;
-      max-width: 700px; /* Constrain width for better layout */
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .card {
-      background: #333;
-      border-radius: 12px;
-      padding: 25px;
-      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
-      transition: transform 0.3s, box-shadow 0.3s;
-      color: #f5b500;
-      cursor: default;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      user-select: none;
-    }
-    .card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 14px 25px rgba(245, 181, 0, 0.8);
-    }
-    .card h3 {
-      margin-bottom: 15px;
-      color: #f5b500;
-      font-size: 1.6rem;
-      font-weight: 700;
-    }
+        /* Section Styling (About, Vision, Services, Objectives, Portfolio, Team) */
+        section {
+            padding: 80px 20px;
+            text-align: center;
+            background: rgba(38, 38, 38, 0.85); /* Dark semi-transparent background */
+            max-width: 1200px;
+            margin: 0 auto 60px auto; /* Centered with bottom margin */
+            border-radius: 12px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+        }
+        section h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            position: relative;
+            font-weight: 700;
+        }
+        section h2::after {
+            content: "";
+            display: block;
+            margin: 10px auto;
+            width: 80px;
+            height: 4px;
+            background-color: #f5b500; /* Accent color underline */
+            border-radius: 2px;
+        }
+        section p {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 18px;
+        }
 
-    /* Objectives List */
-    #objectives ul {
-      list-style: none;
-      padding: 0;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 25px;
-      margin-top: 40px;
-      max-width: 900px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    #objectives li {
-      background: #333;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
-      position: relative;
-      color: #f5b500;
-      font-size: 1.2rem;
-      font-weight: 500;
-      user-select: none;
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-    #objectives li:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 30px rgba(245, 181, 0, 0.8);
-    }
+        /* Vision & Mission Specific */
+        .vision-mission {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+        .vision-mission > div {
+            max-width: 450px;
+            background: #333;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .vision-mission > div:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 14px 25px rgba(245, 181, 0, 0.8);
+        }
+        .vision-mission h3 {
+            margin-bottom: 15px;
+        }
 
-    /* Portfolio Gallery */
-    #portfolio .portfolio-gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.5rem;
-      padding: 1rem 0;
-      margin-top: 40px; /* Add margin to separate from h2 */
-    }
+        /* Service Cards */
+        .service-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+            max-width: 700px; /* Constrain width for better layout */
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .card {
+            background: #333;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+            transition: transform 0.3s, box-shadow 0.3s;
+            color: #f5b500;
+            cursor: default;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            user-select: none;
+        }
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 14px 25px rgba(245, 181, 0, 0.8);
+        }
+        .card h3 {
+            margin-bottom: 15px;
+            color: #f5b500;
+            font-size: 1.6rem;
+            font-weight: 700;
+        }
 
-    #portfolio .portfolio-gallery div {
-      overflow: hidden;
-      border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      background: #333; /* Match card background */
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
+        /* Objectives List */
+        #objectives ul {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        #objectives li {
+            background: #333;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+            position: relative;
+            color: #f5b500;
+            font-size: 1.2rem;
+            font-weight: 500;
+            user-select: none;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        #objectives li:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(245, 181, 0, 0.8);
+        }
 
-    #portfolio .portfolio-gallery div:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 14px 25px rgba(245, 181, 0, 0.8);
-    }
+        /* Portfolio Gallery */
+        #portfolio .portfolio-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            padding: 1rem 0;
+            margin-top: 40px; /* Add margin to separate from h2 */
+        }
 
-    #portfolio .portfolio-gallery img,
-    #portfolio .portfolio-gallery video {
-      width: 100%;
-      height: 250px;
-      object-fit: cover;
-      display: block;
-    }
+        #portfolio .portfolio-gallery div {
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            background: #333; /* Match card background */
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
 
-    /* Team Profiles */
-    .team-profiles {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 30px;
-      margin-top: 40px;
-      max-width: 1100px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .team-profiles > div {
-      background: #333;
-      padding: 30px 20px;
-      border-radius: 15px;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-      text-align: center;
-      color: #f5b500;
-      user-select: none;
-      cursor: default;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-    .team-profiles > div:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 30px rgba(245, 181, 0, 0.8);
-    }
-    .team-profiles img {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      object-fit: cover;
-      margin-bottom: 15px;
-      box-shadow: 0 0 15px rgba(245, 181, 0, 0.8);
-    }
-    .team-profiles h3 {
-      color: #f5b500;
-      margin-bottom: 8px;
-      font-size: 1.5rem;
-      font-weight: 700;
-    }
-    .team-profiles p {
-      font-weight: 400;
-      font-size: 1.1rem;
-      max-width: 250px;
-    }
+        #portfolio .portfolio-gallery div:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 14px 25px rgba(245, 181, 0, 0.8);
+        }
 
-    /* Footer */
-    footer {
-      background: #111;
-      color: #f5b500;
-      text-align: center;
-      padding: 30px 20px;
-      margin-top: 60px;
-      font-size: 0.9rem;
-      user-select: none;
-    }
-    .social-icons {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      margin-top: 20px;
-      margin-bottom: 20px; /* Add margin for spacing */
-    }
-    .social-icons img {
-      width: 40px;
-      height: auto;
-      cursor: pointer;
-      transition: transform 0.3s;
-    }
-    .social-icons img:hover {
-      transform: scale(1.1);
-    }
+        #portfolio .portfolio-gallery img,
+        #portfolio .portfolio-gallery video {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
 
-    /* Responsive Adjustments */
-    @media (max-width: 768px) {
-      .hero h2 {
-        font-size: 36px;
-      }
-      nav ul {
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
-        margin-top: 10px; /* Add margin for stacked nav items */
-      }
-      nav {
-        flex-direction: column;
-        align-items: center;
-        padding: 1rem;
-      }
-      nav img {
-        margin-bottom: 10px;
-      }
-      section {
-        padding: 50px 15px;
-      }
-      .service-cards, #objectives ul, .team-profiles {
-        grid-template-columns: 1fr;
-      }
-      .team-profiles > div {
-        max-width: 320px;
-        margin: 0 auto;
-      }
-      .cta-button {
-        padding: 12px 30px;
-        font-size: 1rem;
-        right: 15px;
-        bottom: 15px;
-      }
-    }
-  </style>
+        /* Team Profiles */
+        .team-profiles {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+            max-width: 1100px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .team-profiles > div {
+            background: #333;
+            padding: 30px 20px;
+            border-radius: 15px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            color: #f5b500;
+            user-select: none;
+            cursor: default;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .team-profiles > div:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(245, 181, 0, 0.8);
+        }
+        .team-profiles img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+            box-shadow: 0 0 15px rgba(245, 181, 0, 0.8);
+        }
+        .team-profiles h3 {
+            color: #f5b500;
+            margin-bottom: 8px;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        .team-profiles p {
+            font-weight: 400;
+            font-size: 1.1rem;
+            max-width: 250px;
+        }
+
+        /* Footer */
+        footer {
+            background: #111;
+            color: #f5b500;
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 60px;
+            font-size: 0.9rem;
+            user-select: none;
+        }
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+            margin-bottom: 20px; /* Add margin for spacing */
+        }
+        .social-icons img {
+            width: 40px;
+            height: auto;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .social-icons img:hover {
+            transform: scale(1.1);
+        }
+
+        /* Custom styles for date/time picker indicators */
+        input[type="date"]::-webkit-calendar-picker-indicator,
+        input[type="time"]::-webkit-calendar-picker-indicator {
+            /* Invert for dark theme, then apply a yellow tint */
+            filter: invert(1) hue-rotate(200deg) saturate(5) brightness(1.5);
+            cursor: pointer;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .hero h2 {
+                font-size: 36px;
+            }
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+                margin-top: 10px; /* Add margin for stacked nav items */
+            }
+            nav {
+                flex-direction: column;
+                align-items: center;
+                padding: 1rem;
+            }
+            nav img {
+                margin-bottom: 10px;
+            }
+            section {
+                padding: 50px 15px;
+            }
+            .service-cards, #objectives ul, .team-profiles {
+                grid-template-columns: 1fr;
+            }
+            .team-profiles > div {
+                max-width: 320px;
+                margin: 0 auto;
+            }
+            .cta-button {
+                padding: 12px 30px;
+                font-size: 1rem;
+                right: 15px;
+                bottom: 15px;
+            }
+            .next-page-button {
+                padding: 12px 30px;
+                font-size: 1rem;
+                right: 15px;
+                bottom: 75px; /* Adjust position for mobile */
+            }
+        }
+    </style>
 </head>
 <body>
 
-  <nav>
-    <!-- Reverted to original local path as requested -->
-    <img src="Logo white text.png" alt="AntBite Studios Logo" />
-    <ul>
-      <li><a href="#about">About</a></li>
-      <li><a href="#vision">Vision & Mission</a></li>
-      <li><a href="#services">Services</a></li>
-      <li><a href="#objectives">Objectives</a></li>
-      <li><a href="#portfolio">Our Portfolio</a></li>
-      <li><a href="#team">Meet the Team</a></li>
-    </ul>
-  </nav>
+    <nav>
+        <img src="Logo white text.png" alt="AntBite Studios Logo" />
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#vision">Vision & Mission</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#objectives">Objectives</a></li>
+            <li><a href="#portfolio">Our Portfolio</a></li>
+            <li><a href="#team">Meet the Team</a></li>
+            <li><a href="#booking-section">Book Now</a></li>
+            <li><a href="next-page.html">Next Page</a></li> <!-- Added link to next page -->
+        </ul>
+    </nav>
 
-  <header class="hero">
-    <h2></h2> 
-  </header>
+    <header class="hero">
+        <h2></h2>
+    </header>
 
-  <a href="#footer-contact" class="cta-button">Contact Us</a>
+    <a href="#footer-contact" class="cta-button">Contact Us</a>
+    <a href="next-page.html" class="next-page-button">Explore More</a> <!-- New floating button -->
 
-  <section id="about">
-    <h2>About Us</h2>
-    <p>AntBite is a bold, dynamic creative agency with a focus on high-impact visuals and storytelling. We specialize in videos, photography, and omnichannel marketing strategies that bring your business to life and connect with your audience on a visceral level. Much like ants—small but mighty—we’re agile, organized, and relentless in our pursuit of results.</p>
-  </section>
+    <section id="about">
+        <h2>About Us</h2>
+        <p>AntBite is a bold, dynamic creative agency with a focus on high-impact visuals and storytelling. We specialize in videos, photography, and omnichannel marketing strategies that bring your business to life and connect with your audience on a visceral level. Much like ants—small but mighty—we’re agile, organized, and relentless in our pursuit of results.</p>
+    </section>
 
-  <section id="vision">
-    <h2>Vision & Mission</h2>
-    <div class="vision-mission">
-      <div>
-        <h3>Vision</h3>
-        <p>To become a leading force in creative media that demand smart and impactful marketing for businesses of all sizes — blending storytelling strategy, and striking visuals to build lasting impressions and measurable success.</p>
-      </div>
-      <div>
-        <h3>Mission</h3>
-        <p>To craft compelling visual stories and high-impact advertising that bite into attention and linger in memory. We empower brands through creative video production, bold storytelling, and strategic media solutions.</p>
-      </div>
-    </div>
-  </section>
+    <section id="vision">
+        <h2>Vision & Mission</h2>
+        <div class="vision-mission">
+            <div>
+                <h3>Vision</h3>
+                <p>To become a leading force in creative media that demand smart and impactful marketing for businesses of all sizes — blending storytelling strategy, and striking visuals to build lasting impressions and measurable success.</p>
+            </div>
+            <div>
+                <h3>Mission</h3>
+                <p>To craft compelling visual stories and high-impact advertising that bite into attention and linger in memory. We empower brands through creative video production, bold storytelling, and strategic media solutions.</p>
+            </div>
+        </div>
+    </section>
 
-  <section id="services">
-    <h2>Our Services</h2>
-    <div class="service-cards">
-      <div class="card">
-        <h3>Digital</h3>
-        <p>Campaign Development, Social Media Ads, Marketing Graphics</p>
-      </div>
-      <div class="card">
-        <h3>Traditional</h3>
-        <p>Commercials, Product Video, Event Coverage, Corporate Video, Print Ads</p>
-      </div>
-      <div class="card">
-        <h3>Media</h3>
-        <p>Media Planning / Strategy & Buying, Digital Media Planning, Performance Marketing</p>
-      </div>
-      <div class="card">
-        <h3>Branding</h3>
-        <p>Logos and Brand Identity, Packaging and Collaterals, Brand Book</p>
-      </div>
-    </div>
-  </section>
+    <section id="services">
+        <h2>Our Services</h2>
+        <div class="service-cards">
+            <div class="card">
+                <h3>Digital</h3>
+                <p>Campaign Development, Social Media Ads, Marketing Graphics</p>
+            </div>
+            <div class="card">
+                <h3>Traditional</h3>
+                <p>Commercials, Product Video, Event Coverage, Corporate Video, Print Ads</p>
+            </div>
+            <div class="card">
+                <h3>Media</h3>
+                <p>Media Planning / Strategy & Buying, Digital Media Planning, Performance Marketing</p>
+            </div>
+            <div class="card">
+                <h3>Branding</h3>
+                <p>Logos and Brand Identity, Packaging and Collaterals, Brand Book</p>
+            </div>
+        </div>
+    </section>
 
-  <section id="objectives">
-    <h2>Objectives</h2>
-    <ul>
-      <li>Deliver High-Impact Visual Content</li>
-      <li>Provide Strategic, Omnichannel Marketing Solutions</li>
-      <li>Achieve Sustainable Business Growth</li>
-      <li>Build Customer Loyalty</li>
-      <li>Brand Management and Identity</li>
-      <li>Trusted presence locally while strategically expanding into international markets</li>
-    </ul>
-  </section>
+    <section id="objectives">
+        <h2>Objectives</h2>
+        <ul>
+            <li>Deliver High-Impact Visual Content</li>
+            <li>Provide Strategic, Omnichannel Marketing Solutions</li>
+            <li>Achieve Sustainable Business Growth</li>
+            <li>Build Customer Loyalty</li>
+            <li>Brand Management and Identity</li>
+            <li>Trusted presence locally while strategically expanding into international markets</li>
+        </ul>
+    </section>
 
-  <section id="portfolio">
-    <h2>Our Portfolio</h2>
-    <div class="portfolio-gallery">
-      <div class="Potrait Photography">
-        <!-- Reverted to original local path as requested -->
-        <img src="IMG_8538.JPG" alt="Portfolio Item 1" />
-      </div>
-      <div class="Studio">
-        <!-- Reverted to original local path as requested -->
-        <img src="SOFT OPENING.png" alt="Portfolio Item 2" />
-      </div>
-      <div class="AntBite Studios">
-        <!-- Reverted to original local path as requested -->
-        <video controls>
-          <source src="Revise last (1) (1).mp4" type="video/mp4">
-          Your browser does not support HTML5 video.
-        </video>
-      </div>
-      <div class="Sport Photography">
-        <!-- Reverted to original local path as requested -->
-        <img src="G.AMO-08.jpg" alt="Portfolio Item 3" />
-      </div>
-    </div>
-  </section>
+    <section id="portfolio">
+        <h2>Our Portfolio</h2>
+        <div class="portfolio-gallery">
+            <div class="Potrait Photography">
+                <img src="IMG_8538.JPG" alt="Portfolio Item 1" />
+            </div>
+            <div class="Studio">
+                <img src="SOFT OPENING.png" alt="Portfolio Item 2" />
+            </div>
+            <div class="AntBite Studios">
+                <video controls>
+                    <source src="Revise last (1) (1).mp4" type="video/mp4">
+                    Your browser does not support HTML5 video.
+                </video>
+            </div>
+            <div class="Sport Photography">
+                <img src="G.AMO-08.jpg" alt="Portfolio Item 3" />
+            </div>
+        </div>
+    </section>
 
-  <section id="team">
-    <h2>Meet the Team</h2>
-    <div class="team-profiles">
-      <div>
-        <!-- Reverted to original local path as requested -->
-        <img src="Untitled design (12).png" alt="Francis Adarlo" />
-        <h3>Francis Adarlo</h3>
-        <a href="https://web.facebook.com/francis.adarlo" target="_blank">About</a>
-        <p>Founder, Creative Director</p>
-      </div>
+    <section id="team">
+        <h2>Meet the Team</h2>
+        <div class="team-profiles">
+            <div>
+                <img src="Untitled design (12).png" alt="Francis Adarlo" />
+                <h3>Francis Adarlo</h3>
+                <a href="https://web.facebook.com/francis.adarlo" target="_blank">About</a>
+                <p>Founder, Creative Director</p>
+            </div>
 
-      <div>
-        <!-- Reverted to original local path as requested -->
-        <img src="IMG_6814.JPG" alt="Shane Gayoma" />
-        <h3>Shane Gayoma</h3>
-        <a href="https://www.linkedin.com/in/shane-denzel-gayoma/" target="_blank">About</a>
-        <p>Chief Operating Officer</p>
-      </div>
+            <div>
+                <img src="IMG_6814.JPG" alt="Shane Gayoma" />
+                <h3>Shane Gayoma</h3>
+                <a href="https://www.linkedin.com/in/shane-denzel-gayoma/" target="_blank">About</a>
+                <p>Chief Operating Officer</p>
+            </div>
 
-      <div>
-        <!-- Reverted to original local path as requested -->
-        <img src="Untitled design (8).png" alt="Lloyd Mendoza" />
-        <h3>Lloyd Mendoza</h3>
-        <a href="https://web.facebook.com/john.lloyd.mendoza.25" target="_blank">About</a>
-        <p>Account Manager</p>
-      </div>
+            <div>
+                <img src="Untitled design (8).png" alt="Lloyd Mendoza" />
+                <h3>Lloyd Mendoza</h3>
+                <a href="https://web.facebook.com/john.lloyd.mendoza.25" target="_blank">About</a>
+                <p>Account Manager</p>
+            </div>
 
-      <div>
-        <!-- Reverted to original local path as requested -->
-        <img src="Untitled design (9).png" alt="Reign Ecleo" />
-        <h3>Reign Ecleo</h3>
-        <a href="https://web.facebook.com/reign.ecleo" target="_blank">About</a>
-        <p>Copywriter, Social Media Specialist</p>
-      </div>
+            <div>
+                <img src="Untitled design (9).png" alt="Reign Ecleo" />
+                <h3>Reign Ecleo</h3>
+                <a href="https://web.facebook.com/reign.ecleo" target="_blank">About</a>
+                <p>Copywriter, Social Media Specialist</p>
+            </div>
 
-      <div>
-        <!-- Reverted to original local path as requested -->
-        <img src="Untitled design (11).png" alt="Diandra Manimtim" />
-        <h3>Diandra Manimtim</h3>
-        <a href="https://web.facebook.com/diandradenisemanimtim" target="_blank">About</a>
-        <p>Marketing Manager</p>
-      </div>
+            <div>
+                <img src="Untitled design (11).png" alt="Diandra Manimtim" />
+                <h3>Diandra Manimtim</h3>
+                <a href="https://web.facebook.com/diandradenisemanimtim" target="_blank">About</a>
+                <p>Marketing Manager</p>
+            </div>
 
-      <div>
-        <!-- Reverted to original local path as requested -->
-        <img src="Untitled design (15).png" alt="Ralph Dave Soliman" />
-        <h3>Ralph Dave Soliman</h3>
-        <a href="https://www.facebook.com/Ralphdavesoliman" target="_blank">About</a>
-        <p>Video Production Specialist</p>
-      </div>
+            <div>
+                <img src="Untitled design (15).png" alt="Ralph Dave Soliman" />
+                <h3>Ralph Dave Soliman</h3>
+                <a href="https://www.facebook.com/Ralphdavesoliman" target="_blank">About</a>
+                <p>Video Production Specialist</p>
+            </div>
 
-      <div>
-        <!-- Reverted to original local path as requested -->
-        <img src="Untitled design (16).png" alt="Janssen Garin" />
-        <h3>Janssen Garin</h3>
-        <a href="https://web.facebook.com/breniee.deleon" target="_blank">About</a>
-        <p>Photographer, Multimedia Designer</p>
-      </div>
+            <div>
+                <img src="Untitled design (16).png" alt="Janssen Garin" />
+                <h3>Janssen Garin</h3>
+                <a href="https://web.facebook.com/breniee.deleon" target="_blank">About</a>
+                <p>Photographer, Multimedia Designer</p>
+            </div>
 
-      <div>
-        <!-- Reverted to original local path as requested -->
-        <img src="Untitled design (14).png" alt="Karla Lois Amihan" />
-        <h3>Karla Lois Amihan</h3>
-        <a href="https://web.facebook.com/karlamihan" target="_blank">About</a>
-        <p>Art Director</p>
-      </div>
+            <div>
+                <img src="Untitled design (14).png" alt="Karla Lois Amihan" />
+                <h3>Karla Lois Amihan</h3>
+                <a href="https://web.facebook.com/karlamihan" target="_blank">About</a>
+                <p>Art Director</p>
+            </div>
 
-      <div>
-        <!-- Reverted to original local path as requested -->
-        <img src="Untitled design (5).png" alt="Brian Justine Cuenca" />
-        <h3>Brian Justine Cuenca</h3>
-        <a href="https://web.facebook.com/bryynnnnn" target="_blank">About</a>
-        <p>UI/UX Designer and Developer</p>
-      </div>
+            <div>
+                <img src="Untitled design (5).png" alt="Brian Justine Cuenca" />
+                <h3>Brian Justine Cuenca</h3>
+                <a href="https://web.facebook.com/bryynnnnn" target="_blank">About</a>
+                <p>UI/UX Designer and Developer</p>
+            </div>
 
-      <div>
-        <!-- Reverted to original local path as requested -->
-        <img src="DIZON FRONT.png" alt="John Timothy Dizon" />
-        <h3>John Timothy Dizon</h3>
-        <a href="https://web.facebook.com/cybertim08n" target="_blank">About</a>
-        <p>Video Producer</p>
-      </div>
-      
-      <div>
-        <!-- Reverted to original local path as requested -->
-        <img src="356889576_3483966065203398_8221395667789934554_n.jpg" alt="James Britos" />
-        <h3>James Britos</h3>
-        <a href="https://www.facebook.com/james.britos.1" target="_blank">About</a>
-        <p>Motion Graphics / Animator</p>
-      </div>
-    </div>
-  </section>
+            <div>
+                <img src="DIZON FRONT.png" alt="John Timothy Dizon" />
+                <h3>John Timothy Dizon</h3>
+                <a href="https://web.facebook.com/cybertim08n" target="_blank">About</a>
+                <p>Video Producer</p>
+            </div>
 
-  <footer id="footer-contact">
-    <p>Follow us on social media:</p>
-    <div class="social-icons">
-      <!-- Reverted to original local path as requested -->
-      <a href="https://www.facebook.com/profile.php?id=61575726695454" target="_blank">
-        <img src="images-removebg-preview.png" alt="Facebook" />
-      </a>
-      <a href="https://www.instagram.com/antbite.studios/" target="_blank">
-        <img src="png-transparent-social-media-instagram-login-graphy-ig-instagram-icon-rectangle-magenta-mobile-phones-thumbnail-removebg-preview.png" alt="Instagram" />
-      </a>
-      <a href="https://www.tiktok.com/@antbite.studios" target="_blank">
-        <img src="download (1).png" alt="TikTok" />
-      </a>
-      <a href="https://www.youtube.com/@AntbiteStudios" target="_blank">
-        <img src="images__2_-removebg-preview.png" alt="YouTube" />
-      </a>
-    </div>
-    <p>Contact us: antbitestudios.com | 0962-557-0863</p>
-    <p>&copy; 2025 AntBite Studios. All rights reserved.</p>
-  </footer>
+            <div>
+                <img src="356889576_3483966065203398_8221395667789934554_n.jpg" alt="James Britos" />
+                <h3>James Britos</h3>
+                <a href="https://www.facebook.com/james.britos.1" target="_blank">About</a>
+                <p>Motion Graphics / Animator</p>
+            </div>
+        </div>
+    </section>
 
+    <!-- Booking System Section -->
+    <section id="booking-section" class="bg-antbite-light-dark text-antbite-yellow max-w-4xl w-full my-8 mx-auto p-8 md:p-10 lg:p-12 shadow-2xl rounded-xl">
+        <h2 class="text-4xl md:text-5xl font-extrabold text-center mb-8">
+            Book Your Service
+        </h2>
+
+        <div id="error-message" class="hidden bg-red-800 border border-red-600 text-red-200 px-4 py-3 rounded-md relative mb-6" role="alert">
+            <strong class="font-bold">Error!</strong>
+            <span id="error-text" class="block sm:inline"></span>
+        </div>
+
+        <form id="booking-form" class="space-y-6">
+            <!-- Service Selection -->
+            <div>
+                <label for="service" class="block text-lg font-medium text-gray-300 mb-2">
+                    Select Service
+                </label>
+                <select
+                    id="service"
+                    name="service"
+                    class="mt-1 block w-full pl-3 pr-10 py-3 text-base bg-gray-700 text-gray-200 border-gray-600 focus:outline-none focus:ring-antbite-yellow focus:border-antbite-yellow sm:text-lg rounded-md shadow-sm transition duration-150 ease-in-out"
+                    required
+                >
+                    <option value="">-- Choose a service --</option>
+                    <!-- Options will be populated by JavaScript -->
+                </select>
+            </div>
+
+            <!-- Date and Time Selection -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label for="date" class="block text-lg font-medium text-gray-300 mb-2">
+                        Date
+                    </label>
+                    <input
+                        type="date"
+                        id="date"
+                        name="date"
+                        class="mt-1 block w-full px-4 py-3 bg-gray-700 text-gray-200 border border-gray-600 rounded-md shadow-sm focus:ring-antbite-yellow focus:border-antbite-yellow sm:text-lg transition duration-150 ease-in-out"
+                        required
+                    />
+                </div>
+                <div>
+                    <label for="time" class="block text-lg font-medium text-gray-300 mb-2">
+                        Time
+                    </label>
+                    <input
+                        type="time"
+                        id="time"
+                        name="time"
+                        class="mt-1 block w-full px-4 py-3 bg-gray-700 text-gray-200 border border-gray-600 rounded-md shadow-sm focus:ring-antbite-yellow focus:border-antbite-yellow sm:text-lg transition duration-150 ease-in-out"
+                        required
+                    />
+                </div>
+            </div>
+
+            <!-- User Details -->
+            <div>
+                <label for="name" class="block text-lg font-medium text-gray-300 mb-2">
+                    Full Name
+                </label>
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    class="mt-1 block w-full px-4 py-3 bg-gray-700 text-gray-200 border border-gray-600 rounded-md shadow-sm focus:ring-antbite-yellow focus:border-antbite-yellow sm:text-lg transition duration-150 ease-in-out"
+                    placeholder="John Doe"
+                    required
+                />
+            </div>
+            <div>
+                <label for="email" class="block text-lg font-medium text-gray-300 mb-2">
+                    Email Address
+                </label>
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    class="mt-1 block w-full px-4 py-3 bg-gray-700 text-gray-200 border border-gray-600 rounded-md shadow-sm focus:ring-antbite-yellow focus:border-antbite-yellow sm:text-lg transition duration-150 ease-in-out"
+                    placeholder="john.doe@example.com"
+                    required
+                />
+            </div>
+            <div>
+                <label for="phone" class="block text-lg font-medium text-gray-300 mb-2">
+                    Phone Number
+                </label>
+                <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    class="mt-1 block w-full px-4 py-3 bg-gray-700 text-gray-200 border border-gray-600 rounded-md shadow-sm focus:ring-antbite-yellow focus:border-antbite-yellow sm:text-lg transition duration-150 ease-in-out"
+                    placeholder="+1 (555) 123-4567"
+                    required
+                />
+            </div>
+
+            <!-- Booking Summary -->
+            <div id="booking-summary" class="hidden bg-neutral-700 border-l-4 border-antbite-yellow p-4 rounded-md shadow-inner">
+                <h2 class="text-xl font-semibold text-antbite-yellow mb-3">Booking Summary</h2>
+                <p class="text-gray-300"><span class="font-medium">Service:</span> <span id="summary-service"></span></p>
+                <p class="text-gray-300"><span class="font-medium">Date:</span> <span id="summary-date"></span></p>
+                <p class="text-gray-300"><span class="font-medium">Time:</span> <span id="summary-time"></span></p>
+                <p class="text-gray-300"><span class="font-medium">Price:</span> <span id="summary-price"></span></p>
+                <p class="text-gray-300"><span class="font-medium">Name:</span> <span id="summary-name"></span></p>
+                <p class="text-gray-300"><span class="font-medium">Email:</span> <span id="summary-email"></span></p>
+                <p class="text-gray-300"><span class="font-medium">Phone:</span> <span id="summary-phone"></span></p>
+            </div>
+
+            <!-- Payment Section -->
+            <div class="pt-6">
+                <h2 class="text-2xl font-bold text-antbite-yellow mb-4">Payment Information</h2>
+                <div class="bg-neutral-700 p-6 rounded-lg shadow-inner">
+                    <p class="text-gray-300 mb-4">
+                        This is a placeholder for a secure payment gateway integration. In a real application,
+                        you would see fields for credit card details or options for other payment methods (e.g., PayPal, Stripe).
+                        Click "Confirm Booking" to simulate payment and finalize your appointment.
+                    </p>
+                    <p id="payment-message" class="text-center font-semibold text-lg mb-4"></p>
+                    <button
+                        type="submit"
+                        id="confirm-button"
+                        class="w-full bg-antbite-yellow hover:bg-yellow-600 text-gray-900 font-bold py-3 px-6 rounded-lg shadow-md transition duration-200 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-antbite-yellow focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                        Confirm Booking
+                    </button>
+                </div>
+            </div>
+        </form>
+    </section>
+
+    <!-- Display Existing Bookings -->
+    <section id="bookings-section" class="bg-antbite-light-dark text-antbite-yellow max-w-4xl w-full my-8 mx-auto p-8 md:p-10 lg:p-12 shadow-2xl rounded-xl">
+        <h2 class="text-3xl font-extrabold text-center mb-6">
+            Your Bookings (<span id="current-user-id">Loading...</span>)
+        </h2>
+        <div id="bookings-list" class="space-y-4">
+            <p class="text-center text-gray-300 text-lg" id="no-bookings-message">No bookings yet. Make one above!</p>
+            <!-- Bookings will be populated here by JavaScript -->
+        </div>
+    </section>
+
+    <footer id="footer-contact">
+        <p>Follow us on social media:</p>
+        <div class="social-icons">
+            <a href="https://www.facebook.com/profile.php?id=61575726695454" target="_blank">
+                <img src="images-removebg-preview.png" alt="Facebook" />
+            </a>
+            <a href="https://www.instagram.com/antbite.studios/" target="_blank">
+                <img src="png-transparent-social-media-instagram-login-graphy-ig-instagram-icon-rectangle-magenta-mobile-phones-thumbnail-removebg-preview.png" alt="Instagram" />
+            </a>
+            <a href="https://www.tiktok.com/@antbite.studios" target="_blank">
+                <img src="download (1).png" alt="TikTok" />
+            </a>
+            <a href="https://www.youtube.com/@AntbiteStudios" target="_blank">
+                <img src="images__2_-removebg-preview.png" alt="YouTube" />
+            </a>
+        </div>
+        <p>Contact us: antbitestudios.com | 0962-557-0863</p>
+        <p>&copy; 2025 AntBite Studios. All rights reserved.</p>
+    </footer>
+
+    <!-- Firebase SDKs and Booking Logic -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc, onSnapshot, query, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Global variables provided by the Canvas environment
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
+        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+
+        // Initialize Firebase
+        let app;
+        let db;
+        let auth;
+        let currentUserId = null;
+        let isAuthReady = false;
+
+        try {
+            app = initializeApp(firebaseConfig);
+            db = getFirestore(app);
+            auth = getAuth(app);
+        } catch (error) {
+            console.error("Firebase initialization failed:", error);
+            displayError("Firebase initialization failed. Booking features may be limited.");
+        }
+
+        // Services available for booking
+        const services = [
+            { id: 'digital', name: 'Digital Marketing', price: 150 },
+            { id: 'traditional', name: 'Traditional Marketing', price: 250 },
+            { id: 'media', name: 'Media Planning', price: 200 },
+            { id: 'branding', name: 'Branding Consultation', price: 100 },
+        ];
+
+        // DOM elements for the booking section
+        const serviceSelect = document.getElementById('service');
+        const dateInput = document.getElementById('date');
+        const timeInput = document.getElementById('time');
+        const nameInput = document.getElementById('name');
+        const emailInput = document.getElementById('email');
+        const phoneInput = document.getElementById('phone');
+        const bookingForm = document.getElementById('booking-form');
+        const confirmButton = document.getElementById('confirm-button');
+        const paymentMessageElem = document.getElementById('payment-message');
+        const errorMessageElem = document.getElementById('error-message');
+        const errorTextElem = document.getElementById('error-text');
+        const bookingSummaryElem = document.getElementById('booking-summary');
+        const bookingsListElem = document.getElementById('bookings-list');
+        const noBookingsMessageElem = document.getElementById('no-bookings-message');
+        const currentUserIdElem = document.getElementById('current-user-id');
+
+        // Populate service options
+        function populateServices() {
+            services.forEach(s => {
+                const option = document.createElement('option');
+                option.value = s.id;
+                option.textContent = `${s.name} - $${s.price}`;
+                serviceSelect.appendChild(option);
+            });
+        }
+
+        // Display error message
+        function displayError(message) {
+            errorTextElem.textContent = message;
+            errorMessageElem.classList.remove('hidden');
+        }
+
+        // Hide error message
+        function hideError() {
+            errorMessageElem.classList.add('hidden');
+            errorTextElem.textContent = '';
+        }
+
+        // Update booking summary
+        function updateBookingSummary() {
+            const selectedService = services.find(s => s.id === serviceSelect.value);
+            const date = dateInput.value;
+            const time = timeInput.value;
+            const name = nameInput.value;
+            const email = emailInput.value;
+            const phone = phoneInput.value;
+
+            if (selectedService && date && time && name && email && phone) {
+                document.getElementById('summary-service').textContent = selectedService.name;
+                document.getElementById('summary-date').textContent = date;
+                document.getElementById('summary-time').textContent = time;
+                document.getElementById('summary-price').textContent = `$${selectedService.price}`;
+                document.getElementById('summary-name').textContent = name;
+                document.getElementById('summary-email').textContent = email;
+                document.getElementById('summary-phone').textContent = phone;
+                bookingSummaryElem.classList.remove('hidden');
+            } else {
+                bookingSummaryElem.classList.add('hidden');
+            }
+        }
+
+        // Get today's date for min attribute on date input
+        function getTodayDate() {
+            const today = new Date();
+            const year = today.getFullYear();
+            const month = (today.getMonth() + 1).toString().padStart(2, '0');
+            const day = today.getDate().toString().padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        }
+
+        // Set min date for the date input
+        dateInput.min = getTodayDate();
+
+        // Event listeners for updating summary
+        [serviceSelect, dateInput, timeInput, nameInput, emailInput, phoneInput].forEach(input => {
+            input.addEventListener('change', updateBookingSummary);
+            input.addEventListener('keyup', updateBookingSummary); // For text inputs
+        });
+
+        // Firebase Authentication Setup
+        async function setupFirebaseAuthentication() {
+            try {
+                if (initialAuthToken) {
+                    await signInWithCustomToken(auth, initialAuthToken);
+                } else {
+                    await signInAnonymously(auth);
+                }
+                console.log("Firebase authentication successful.");
+            } catch (e) {
+                console.error("Firebase authentication failed:", e);
+                displayError("Failed to authenticate with Firebase. Booking features may be limited.");
+            }
+        }
+
+        // Listen for auth state changes
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                currentUserId = user.uid;
+                currentUserIdElem.textContent = user.uid;
+                console.log("User ID:", user.uid);
+            } else {
+                currentUserId = crypto.randomUUID(); // Fallback for anonymous
+                currentUserIdElem.textContent = currentUserId;
+                console.log("Signed out or no user, using random ID:", currentUserId);
+            }
+            isAuthReady = true; // Auth state is ready
+            listenForBookings(); // Start listening for bookings once auth is ready
+        });
+
+        // Listen for bookings in real-time
+        function listenForBookings() {
+            if (!db || !isAuthReady || !currentUserId) {
+                console.log("Firestore not ready or user not authenticated for listening.");
+                return;
+            }
+
+            const bookingsCollectionRef = collection(db, `artifacts/${appId}/public/data/bookings`);
+            console.log("Listening to bookings at:", `artifacts/${appId}/public/data/bookings`);
+
+            onSnapshot(query(bookingsCollectionRef), (snapshot) => {
+                const fetchedBookings = snapshot.docs.map(doc => ({
+                    id: doc.id,
+                    ...doc.data()
+                }));
+                // Sort bookings by timestamp in descending order (most recent first)
+                fetchedBookings.sort((a, b) => (b.timestamp?.toDate() || 0) - (a.timestamp?.toDate() || 0));
+                renderBookings(fetchedBookings);
+                console.log("Bookings updated:", fetchedBookings);
+            }, (err) => {
+                console.error("Error fetching bookings:", err);
+                displayError("Failed to load bookings. Please try again.");
+            });
+        }
+
+        // Render bookings to the DOM
+        function renderBookings(bookings) {
+            bookingsListElem.innerHTML = ''; // Clear previous bookings
+            if (bookings.length === 0) {
+                noBookingsMessageElem.classList.remove('hidden');
+            } else {
+                noBookingsMessageElem.classList.add('hidden');
+                bookings.forEach(booking => {
+                    const bookingDiv = document.createElement('div');
+                    bookingDiv.className = 'bg-neutral-700 p-5 rounded-lg shadow-sm border border-neutral-600';
+                    bookingDiv.innerHTML = `
+                        <h3 class="text-xl font-semibold text-antbite-yellow mb-2">${booking.service}</h3>
+                        <p class="text-gray-300"><span class="font-medium">Date:</span> ${booking.date}</p>
+                        <p class="text-gray-300"><span class="font-medium">Time:</span> ${booking.time}</p>
+                        <p class="text-gray-300"><span class="font-medium">Name:</span> ${booking.name}</p>
+                        <p class="text-gray-300"><span class="font-medium">Email:</span> ${booking.email}</p>
+                        <p class="text-gray-300"><span class="font-medium">Phone:</span> ${booking.phone}</p>
+                        <p class="text-gray-300 text-sm mt-2">
+                            Booked on: ${booking.timestamp ? new Date(booking.timestamp.toDate()).toLocaleString() : 'N/A'}
+                        </p>
+                    `;
+                    bookingsListElem.appendChild(bookingDiv);
+                });
+            }
+        }
+
+        // Handle form submission
+        bookingForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            hideError();
+            paymentMessageElem.textContent = '';
+            confirmButton.disabled = true;
+            confirmButton.textContent = 'Confirming...';
+            confirmButton.classList.add('opacity-50', 'cursor-not-allowed');
+
+            const serviceId = serviceSelect.value;
+            const date = dateInput.value;
+            const time = timeInput.value;
+            const name = nameInput.value;
+            const email = emailInput.value;
+            const phone = phoneInput.value;
+
+            if (!serviceId || !date || !time || !name || !email || !phone) {
+                displayError('Please fill in all required fields.');
+                confirmButton.disabled = false;
+                confirmButton.textContent = 'Confirm Booking';
+                confirmButton.classList.remove('opacity-50', 'cursor-not-allowed');
+                return;
+            }
+
+            // Simulate payment processing
+            paymentMessageElem.textContent = 'Processing payment...';
+            await new Promise(resolve => setTimeout(resolve, 2000)); // Simulate network delay
+
+            const selectedService = services.find(s => s.id === serviceId);
+            if (!selectedService) {
+                displayError('Invalid service selected.');
+                confirmButton.disabled = false;
+                confirmButton.textContent = 'Confirm Booking';
+                confirmButton.classList.remove('opacity-50', 'cursor-not-allowed');
+                return;
+            }
+
+            const bookingData = {
+                service: selectedService.name,
+                price: selectedService.price,
+                date,
+                time,
+                name,
+                email,
+                phone,
+                timestamp: serverTimestamp(),
+                userId: currentUserId,
+            };
+
+            try {
+                if (!db || !currentUserId) {
+                    throw new Error("Firestore not initialized or user not authenticated.");
+                }
+                const bookingsCollectionRef = collection(db, `artifacts/${appId}/public/data/bookings`);
+                await addDoc(bookingsCollectionRef, bookingData);
+                paymentMessageElem.textContent = 'Payment successful! Booking confirmed.';
+                paymentMessageElem.classList.remove('text-blue-600'); // Remove old color
+                paymentMessageElem.classList.add('text-lime-400'); // Add new color for success
+                confirmButton.textContent = 'Booking Confirmed!';
+                bookingForm.reset(); // Clear form
+                bookingSummaryElem.classList.add('hidden'); // Hide summary
+            } catch (err) {
+                console.error("Error saving booking:", err);
+                displayError(`Failed to confirm booking: ${err.message}. Please try again.`);
+                paymentMessageElem.textContent = '';
+            } finally {
+                confirmButton.disabled = false;
+                confirmButton.classList.remove('opacity-50', 'cursor-not-allowed');
+                // If not confirmed, reset button text
+                if (paymentMessageElem.textContent !== 'Payment successful! Booking confirmed.') {
+                    confirmButton.textContent = 'Confirm Booking';
+                }
+            }
+        });
+
+        // Initialize on window load
+        window.onload = () => {
+            populateServices();
+            setupFirebaseAuthentication();
+            updateBookingSummary(); // Initial update in case fields are pre-filled
+        };
+    </script>
 </body>
 </html>
