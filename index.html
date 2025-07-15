@@ -59,14 +59,14 @@
         nav {
             position: fixed;
             width: 100%;
-            background: rgba(255, 255, 255, 0.2); /* This is the key line */
+            background: rgba(17, 17, 17, 0.8); /* Darker and more transparent */
             padding: 1rem 2rem;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             z-index: 1000;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            backdrop-filter: saturate(180%) blur(10px);
+            backdrop-filter: saturate(180%) blur(10px); /* Kept for frosted effect */
         }
         nav img {
             height: 40px;
@@ -77,17 +77,33 @@
             list-style: none;
             display: flex;
             gap: 20px;
+            /* Default for desktop */
         }
         nav ul li a {
             padding: 10px 15px;
             border-radius: 5px;
             transition: background 0.3s;
             font-weight: 600;
-            color: #333; /* Darker text for navigation links */
+            color: #f5b500; /* Changed text color to yellow for better contrast */
         }
         nav ul li a:hover {
             background: #444;
             color: #f5b500;
+        }
+
+        /* Hamburger menu button */
+        .menu-button {
+            display: none; /* Hidden by default on desktop */
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            z-index: 1001; /* Above nav links when open */
+        }
+        .menu-button svg {
+            fill: #f5b500; /* Yellow color for the icon */
+            width: 30px;
+            height: 30px;
         }
 
         /* Hero Section */
@@ -142,33 +158,6 @@
             transform: scale(1.05);
             box-shadow: 0 0 20px rgba(245, 181, 0, 0.9);
         }
-
-        /* New Floating Button */
-        .next-page-button {
-            position: fixed;
-            right: 30px;
-            bottom: 90px; /* Position above the contact button */
-            z-index: 2000;
-            background-color: #444;
-            color: #f5b500;
-            padding: 15px 40px;
-            border-radius: 30px;
-            font-weight: bold;
-            font-size: 1.2rem;
-            transition: background 0.3s, transform 0.2s;
-            box-shadow: 0 0 10px rgba(245, 181, 0, 0.7);
-            border: none;
-            cursor: pointer;
-            user-select: none;
-            text-align: center;
-        }
-        .next-page-button:hover {
-            background-color: #111;
-            color: #f5b500;
-            transform: scale(1.05);
-            box-shadow: 0 0 20px rgba(245, 181, 0, 0.9);
-        }
-
 
         /* Section Styling (About, Vision, Services, Objectives, Portfolio, Team) */
         section {
@@ -431,19 +420,39 @@
             .hero h2 {
                 font-size: 36px;
             }
+            /* Hide regular nav links on mobile */
             nav ul {
+                display: none;
                 flex-direction: column;
+                position: absolute;
+                top: 60px; /* Below the logo */
+                left: 0;
+                width: 100%;
+                background: rgba(17, 17, 17, 0.95); /* Darker background for open menu */
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+                padding: 1rem 0;
+                gap: 5px;
                 align-items: center;
-                gap: 10px;
-                margin-top: 10px; /* Add margin for stacked nav items */
+                animation: slideDown 0.3s ease-out forwards; /* Smooth animation */
             }
+
+            /* Show nav links when menu is open */
+            nav ul.nav-open {
+                display: flex;
+            }
+
+            /* Show menu button on mobile */
+            .menu-button {
+                display: block;
+            }
+
             nav {
-                flex-direction: column;
-                align-items: center;
-                padding: 1rem;
+                flex-direction: row; /* Keep logo and menu button in a row */
+                justify-content: space-between; /* Space them out */
+                padding: 0.75rem 1rem; /* Adjust padding for mobile nav */
             }
             nav img {
-                margin-bottom: 10px;
+                margin-bottom: 0; /* Remove margin */
             }
             section {
                 padding: 50px 15px;
@@ -461,12 +470,7 @@
                 right: 15px;
                 bottom: 15px;
             }
-            .next-page-button {
-                padding: 12px 30px;
-                font-size: 1rem;
-                right: 15px;
-                bottom: 75px; /* Adjust position for mobile */
-            }
+            /* Removed .next-page-button specific mobile styles as it's removed */
             /* Footer specific adjustments for mobile */
             footer {
                 padding: 20px 15px;
@@ -479,13 +483,31 @@
                 gap: 10px;
             }
         }
+
+        /* Animation for dropdown menu */
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
     </style>
 </head>
 <body>
 
     <nav>
         <img src="Logo white text.png" alt="AntBite Studios Logo" />
-        <ul>
+        <!-- Hamburger menu button for mobile -->
+        <button class="menu-button" id="menuButton" aria-label="Toggle navigation menu">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+            </svg>
+        </button>
+        <ul id="mainNav">
             <li><a href="#about">About</a></li>
             <li><a href="#vision">Vision & Mission</a></li>
             <li><a href="#services">Services</a></li>
@@ -493,7 +515,7 @@
             <li><a href="#portfolio">Our Portfolio</a></li>
             <li><a href="#team">Meet the Team</a></li>
             <li><a href="#booking-section">Book Now</a></li>
-            <li><a href="next-page.html">Next Page</a></li> <!-- Added link to next page -->
+            <li><a href="next-page.html">Next Page</a></li>
         </ul>
     </nav>
 
@@ -502,7 +524,7 @@
     </header>
 
     <a href="#footer-contact" class="cta-button">Contact Us</a>
-    <a href="next-page.html" class="next-page-button">Explore More</a> <!-- New floating button -->
+    <!-- Removed the floating "Explore More" button as requested -->
 
     <section id="about">
         <h2>About Us</h2>
@@ -660,12 +682,6 @@
         </div>
     </section>
 
-
-
-
-
-
-
     <!-- Booking System Section -->
     <section id="booking-section" class="bg-antbite-light-dark text-antbite-yellow max-w-4xl w-full my-8 mx-auto p-8 md:p-10 lg:p-12 shadow-2xl rounded-xl">
         <h2 class="text-4xl md:text-5xl font-extrabold text-center mb-8">
@@ -683,37 +699,15 @@
                 <label for="service" class="block text-lg font-medium text-gray-300 mb-2">
                     Select Service
                 </label>
-               <select
-    id="service"
-    name="service"
-    class="mt-1 block w-full pl-3 pr-10 py-3 text-base bg-gray-700 text-gray-200 border-gray-600 focus:outline-none focus:ring-antbite-yellow focus:border-antbite-yellow sm:text-lg rounded-md shadow-sm transition duration-150 ease-in-out"
-    required
->
-    <option value="">-- Choose a service --</option>
-
-    <optgroup label="Print Services">
-        <option value="business-cards">Business Card Design & Print</option>
-        <option value="flyers-brochures">Flyer & Brochure Design & Print</option>
-        <option value="stickers-labels">Sticker & Label Printing</option>
-        <option value="posters-banners">Poster & Banner Printing</option>
-        <option value="letterheads-envelopes">Letterhead & Envelope Printing</option>
-        <option value="merchandise-printing">Customized Merchandise Printing</option>
-        <option value="large-format-printing">Large Format Printing</option>
-        <option value="invitation-design">Invitation Design & Print</option>
-        <option value="packaging-design">Packaging Design & Print</option>
-    </optgroup>
-
-    <optgroup label="Craft & Creative Services">
-        <option value="logo-design">Logo Design & Branding Packages</option>
-        <option value="social-media-graphics">Graphic Design for Social Media</option>
-        <option value="custom-illustration">Custom Illustration & Artwork</option>
-        <option value="custom-decals">Custom Decals & Vinyl Cutting</option>
-        <option value="personalized-gifts">Personalized Gifts & Decor</option>
-        <option value="engraving-services">Engraving Services</option>
-        <option value="fabric-printing">Fabric Printing & Custom Apparel</option>
-        <option value="creative-consultation">Creative Project Consultation</option>
-    </optgroup>
-</select>
+                <select
+                    id="service"
+                    name="service"
+                    class="mt-1 block w-full pl-3 pr-10 py-3 text-base bg-gray-700 text-gray-200 border-gray-600 focus:outline-none focus:ring-antbite-yellow focus:border-antbite-yellow sm:text-lg rounded-md shadow-sm transition duration-150 ease-in-out"
+                    required
+                >
+                    <option value="">-- Choose a service --</option>
+                    <!-- Options will be populated by JavaScript -->
+                </select>
             </div>
 
             <!-- Date and Time Selection -->
@@ -860,7 +854,6 @@
         // Global variables provided by the Canvas environment
         const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
         const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
-        // Corrected the typo here: initialAuthToken should reference __initial_auth_token
         const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null; 
 
         // Initialize Firebase
@@ -903,6 +896,11 @@
         const bookingsListElem = document.getElementById('bookings-list');
         const noBookingsMessageElem = document.getElementById('no-bookings-message');
         const currentUserIdElem = document.getElementById('current-user-id');
+
+        // New DOM elements for mobile menu
+        const menuButton = document.getElementById('menuButton');
+        const mainNav = document.getElementById('mainNav');
+
 
         // Populate service options
         function populateServices() {
@@ -1145,6 +1143,20 @@
                     confirmButton.textContent = 'Confirm Booking';
                 }
             }
+        });
+
+        // Toggle mobile navigation menu
+        menuButton.addEventListener('click', () => {
+            mainNav.classList.toggle('nav-open');
+        });
+
+        // Close mobile nav when a link is clicked (for smooth scrolling)
+        mainNav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (mainNav.classList.contains('nav-open')) {
+                    mainNav.classList.remove('nav-open');
+                }
+            });
         });
 
         // Initialize on window load
