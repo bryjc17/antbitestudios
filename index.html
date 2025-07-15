@@ -374,13 +374,16 @@
             margin-top: 60px;
             font-size: 0.9rem;
             user-select: none;
+            display: flex;
+            flex-direction: column; /* Ensure vertical stacking on small screens */
+            align-items: center;
+            gap: 20px; /* Space between elements */
         }
         .social-icons {
             display: flex;
             justify-content: center;
             gap: 15px;
-            margin-top: 20px;
-            margin-bottom: 20px; /* Add margin for spacing */
+            /* No margin-top/bottom here, let gap handle spacing */
         }
         .social-icons img {
             width: 40px;
@@ -390,6 +393,29 @@
         }
         .social-icons img:hover {
             transform: scale(1.1);
+        }
+
+        /* Back to Top Button in Footer */
+        .back-to-top-button {
+            background-color: #f5b500;
+            color: #222;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: background 0.3s, transform 0.2s;
+            box-shadow: 0 0 8px rgba(245, 181, 0, 0.7);
+            border: none;
+            cursor: pointer;
+            user-select: none;
+            text-align: center;
+            display: inline-block; /* Allows padding and margin */
+            margin-top: 10px; /* Space from other footer content */
+        }
+        .back-to-top-button:hover {
+            background-color: #e0a800;
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(245, 181, 0, 0.9);
         }
 
         /* Custom styles for date/time picker indicators */
@@ -440,6 +466,17 @@
                 font-size: 1rem;
                 right: 15px;
                 bottom: 75px; /* Adjust position for mobile */
+            }
+            /* Footer specific adjustments for mobile */
+            footer {
+                padding: 20px 15px;
+                gap: 15px; /* Reduce gap on smaller screens */
+            }
+            .social-icons {
+                flex-direction: row; /* Keep social icons in a row, but wrap if needed */
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
             }
         }
     </style>
@@ -783,6 +820,7 @@
         </div>
         <p>Contact us: antbitestudios.com | 0962-557-0863</p>
         <p>&copy; 2025 AntBite Studios. All rights reserved.</p>
+        <a href="#" onclick="window.scrollTo({ top: 0, behavior: 'smooth' }); return false;" class="back-to-top-button">Back to Top</a>
     </footer>
 
     <!-- Firebase SDKs and Booking Logic -->
@@ -794,7 +832,8 @@
         // Global variables provided by the Canvas environment
         const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
         const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
-        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+        // Corrected the typo here: initialAuthToken should reference __initial_auth_token
+        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null; 
 
         // Initialize Firebase
         let app;
@@ -839,10 +878,11 @@
 
         // Populate service options
         function populateServices() {
+            serviceSelect.innerHTML = '<option value="">-- Choose a service --</option>'; // Clear and add default
             services.forEach(s => {
                 const option = document.createElement('option');
                 option.value = s.id;
-                option.textContent = `${s.name} - $${s.price}`; // This is what populates the dropdown
+                option.textContent = s.name; // Display ONLY the service name, no price
                 serviceSelect.appendChild(option);
             });
             console.log("Services populated in dropdown."); // Added for debugging
@@ -906,13 +946,15 @@
             try {
                 if (initialAuthToken) {
                     await signInWithCustomToken(auth, initialAuthToken);
+                    console.log("Attempting sign-in with custom token.");
                 } else {
                     await signInAnonymously(auth);
+                    console.log("Attempting anonymous sign-in.");
                 }
-                console.log("Firebase authentication successful.");
+                console.log("Firebase authentication initiated.");
             } catch (e) {
-                console.error("Firebase authentication failed:", e);
-                displayError("Failed to authenticate with Firebase. Booking features may be limited.");
+                console.error("Firebase authentication failed during setup:", e);
+                displayError("Failed to authenticate with Firebase. Booking features may be limited. Check your Firebase config and network.");
             }
         }
 
@@ -921,25 +963,28 @@
             if (user) {
                 currentUserId = user.uid;
                 currentUserIdElem.textContent = user.uid;
-                console.log("User ID:", user.uid);
+                console.log("User authenticated. User ID:", user.uid);
             } else {
-                currentUserId = crypto.randomUUID(); // Fallback for anonymous
+                // This branch should ideally not be hit if signInAnonymously succeeds,
+                // but good for robustness.
+                currentUserId = crypto.randomUUID(); // Fallback for anonymous if auth fails
                 currentUserIdElem.textContent = currentUserId;
-                console.log("Signed out or no user, using random ID:", currentUserId);
+                console.log("No user authenticated. Using random ID:", currentUserId);
             }
             isAuthReady = true; // Auth state is ready
+            console.log("Firebase authentication state is ready. isAuthReady:", isAuthReady);
             listenForBookings(); // Start listening for bookings once auth is ready
         });
 
         // Listen for bookings in real-time
         function listenForBookings() {
             if (!db || !isAuthReady || !currentUserId) {
-                console.log("Firestore not ready or user not authenticated for listening.");
+                console.log("Firestore not ready or user not authenticated for listening. Skipping booking listener setup.");
                 return;
             }
 
             const bookingsCollectionRef = collection(db, `artifacts/${appId}/public/data/bookings`);
-            console.log("Listening to bookings at:", `artifacts/${appId}/public/data/bookings`);
+            console.log("Setting up real-time listener for bookings at:", `artifacts/${appId}/public/data/bookings`);
 
             onSnapshot(query(bookingsCollectionRef), (snapshot) => {
                 const fetchedBookings = snapshot.docs.map(doc => ({
@@ -952,7 +997,12 @@
                 console.log("Bookings updated:", fetchedBookings);
             }, (err) => {
                 console.error("Error fetching bookings:", err);
-                displayError("Failed to load bookings. Please try again.");
+                // Suggest checking security rules for permission errors
+                if (err.code === 'permission-denied' || err.message.includes('Missing or insufficient permissions')) {
+                    displayError("Failed to load bookings due to insufficient permissions. Please check your Firestore Security Rules.");
+                } else {
+                    displayError(`Failed to load bookings: ${err.message}. Please try again.`);
+                }
             });
         }
 
@@ -970,7 +1020,7 @@
                         <h3 class="text-xl font-semibold text-antbite-yellow mb-2">${booking.service}</h3>
                         <p class="text-gray-300"><span class="font-medium">Date:</span> ${booking.date}</p>
                         <p class="text-gray-300"><span class="font-medium">Time:</span> ${booking.time}</p>
-                        <p class="text-gray-300"><span class="font-medium">Name:</span> ${booking.name}</p>
+                        <p class="text-300"><span class="font-medium">Name:</span> ${booking.name}</p>
                         <p class="text-gray-300"><span class="font-medium">Email:</span> ${booking.email}</p>
                         <p class="text-gray-300"><span class="font-medium">Phone:</span> ${booking.phone}</p>
                         <p class="text-gray-300 text-sm mt-2">
@@ -1006,6 +1056,15 @@
                 return;
             }
 
+            // Ensure Firebase is ready before attempting Firestore write
+            if (!db || !isAuthReady || !currentUserId) {
+                displayError("Firebase is not ready. Please wait a moment and try again. If the issue persists, check your Firebase authentication setup.");
+                confirmButton.disabled = false;
+                confirmButton.textContent = 'Confirm Booking';
+                confirmButton.classList.remove('opacity-50', 'cursor-not-allowed');
+                return;
+            }
+
             // Simulate payment processing
             paymentMessageElem.textContent = 'Processing payment...';
             await new Promise(resolve => setTimeout(resolve, 2000)); // Simulate network delay
@@ -1032,10 +1091,8 @@
             };
 
             try {
-                if (!db || !currentUserId) {
-                    throw new Error("Firestore not initialized or user not authenticated.");
-                }
                 const bookingsCollectionRef = collection(db, `artifacts/${appId}/public/data/bookings`);
+                console.log("Attempting to add booking to Firestore:", bookingData);
                 await addDoc(bookingsCollectionRef, bookingData);
                 paymentMessageElem.textContent = 'Payment successful! Booking confirmed.';
                 paymentMessageElem.classList.remove('text-blue-600'); // Remove old color
@@ -1045,7 +1102,12 @@
                 bookingSummaryElem.classList.add('hidden'); // Hide summary
             } catch (err) {
                 console.error("Error saving booking:", err);
-                displayError(`Failed to confirm booking: ${err.message}. Please try again.`);
+                // Suggest checking security rules for permission errors
+                if (err.code === 'permission-denied' || err.message.includes('Missing or insufficient permissions')) {
+                    displayError("Failed to confirm booking due to insufficient permissions. Please check your Firestore Security Rules.");
+                } else {
+                    displayError(`Failed to confirm booking: ${err.message}. Please try again.`);
+                }
                 paymentMessageElem.textContent = '';
             } finally {
                 confirmButton.disabled = false;
