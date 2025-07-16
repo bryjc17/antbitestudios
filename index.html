@@ -376,13 +376,11 @@
     <script type="module">
         // --- Firebase Imports ---
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
-        // Import getAnalytics only if you plan to use it. If not, it can be removed.
         import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-analytics.js";
         import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
         import { getFirestore, collection, addDoc, onSnapshot, query, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
         // --- Firebase Configuration ---
-        // Your Firebase configuration. This should be copied directly from your Firebase Project Settings.
         const firebaseConfig = {
             apiKey: "AIzaSyBFhwhlK68WwoGHFCWkgJ74J36YgDiXcyg",
             authDomain: "ant-bite.firebaseapp.com",
@@ -394,21 +392,14 @@
         };
 
         // --- Initialize Firebase Services ONCE ---
-        // These are declared as `const` at the top level of the module,
-        // making them available throughout the script.
         const app = initializeApp(firebaseConfig);
-        const analytics = getAnalytics(app); // Initialized here if needed.
+        const analytics = getAnalytics(app); // Keep if you actually use Analytics
         const db = getFirestore(app);
         const auth = getAuth(app);
 
         // --- Global State Variables ---
-        // Use `let` for variables that will change.
         let currentUserId = null;
-        let isAuthReady = false; // Flag to indicate if Firebase Auth state has been determined
-
-        // No need for a try-catch block around the initial `initializeApp`, `getFirestore`, `getAuth` calls here,
-        // as they are handled above. Any errors during the initial Firebase setup will occur
-        // at script load time and typically show in the console.
+        let isAuthReady = false;
 
         // Services available for booking - MUST MATCH YOUR HTML OPTION VALUES AND TEXT
         const services = [
@@ -434,7 +425,8 @@
         ];
 
 
-        // DOM elements for the booking section
+        // --- DOM elements for the booking section (Moved to top level scope) ---
+        // These declarations must happen before any functions that use them are called.
         const serviceSelect = document.getElementById('service');
         const dateInput = document.getElementById('date');
         const timeInput = document.getElementById('time');
@@ -458,6 +450,7 @@
 
         // Display error message
         function displayError(message) {
+            // Now safe to access `errorTextElem` and `errorMessageElem` because they are defined above.
             errorTextElem.textContent = message;
             errorMessageElem.classList.remove('hidden');
             // Scroll to error message for visibility
@@ -472,7 +465,6 @@
 
         // Update booking summary
         function updateBookingSummary() {
-            // Find the selected service based on its value
             const selectedService = services.find(s => s.id === serviceSelect.value);
             const date = dateInput.value;
             const time = timeInput.value;
@@ -480,7 +472,6 @@
             const email = emailInput.value;
             const phone = phoneInput.value;
 
-            // Only show summary if all basic required fields are filled and a service is selected
             if (selectedService && date && time && name && email && phone) {
                 document.getElementById('summary-service').textContent = selectedService.name;
                 document.getElementById('summary-date').textContent = date;
@@ -510,7 +501,6 @@
         // Event listeners for updating summary
         [serviceSelect, dateInput, timeInput, nameInput, emailInput, phoneInput].forEach(input => {
             input.addEventListener('change', updateBookingSummary);
-            // Use 'input' event for immediate feedback on text inputs
             if (['text', 'email', 'tel', 'date', 'time'].includes(input.type)) {
                 input.addEventListener('input', updateBookingSummary);
             }
@@ -520,17 +510,22 @@
         // Firebase Authentication Setup
         async function setupFirebaseAuthentication() {
             try {
-                // We directly attempt anonymous sign-in here.
-                // The `initialAuthToken` variable was not defined and is not typical for anonymous auth.
-                // Removed the `if (auth)` check, as `auth` is now globally defined.
-                await signInAnonymously(auth);
-                console.log("Attempting anonymous sign-in.");
-                console.log("Firebase authentication initiated and successful.");
+                // Ensure auth is defined before using it
+                if (auth) {
+                    await signInAnonymously(auth);
+                    console.log("Attempting anonymous sign-in.");
+                    console.log("Firebase authentication initiated and successful.");
+                } else {
+                    console.warn("Firebase Auth object is not defined. Skipping authentication attempt.");
+                    // Fallback to random ID if auth isn't initialized
+                    currentUserId = crypto.randomUUID();
+                    currentUserIdElem.textContent = currentUserId;
+                }
             } catch (e) {
                 console.error("Firebase authentication failed during setup:", e);
+                // Call displayError safely now that DOM elements are defined
                 displayError("Failed to authenticate with Firebase. Booking features may be limited. Check your console and Firebase config.");
-                // Fallback: Assign a random ID and proceed, but log an error.
-                currentUserId = crypto.randomUUID();
+                currentUserId = crypto.randomUUID(); // Fallback to a random ID
                 currentUserIdElem.textContent = currentUserId;
             } finally {
                 isAuthReady = true; // Auth state is ready regardless of success or fallback
@@ -540,7 +535,6 @@
         }
 
         // Listen for auth state changes
-        // This is the primary way to know if a user is signed in.
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 currentUserId = user.uid;
@@ -548,20 +542,17 @@
                 console.log("User authenticated. User ID:", user.uid);
             } else {
                 // This branch for when a user is signed out or anonymous sign-in fails
-                // It's good to keep this as a fallback if `setupFirebaseAuthentication` somehow fails
-                // or the user logs out later (though not implemented here).
                 currentUserId = crypto.randomUUID(); // Fallback to a random ID
                 currentUserIdElem.textContent = currentUserId;
                 console.log("No user authenticated or signed out. Using random ID:", currentUserId);
             }
             // `isAuthReady = true;` and `listenForBookings()` are handled in `setupFirebaseAuthentication`'s `finally` block
-            // to ensure they trigger after an explicit sign-in attempt, preventing double calls or race conditions.
+            // This prevents duplicate calls and race conditions.
         });
 
 
         // Listen for bookings in real-time
         function listenForBookings() {
-            // Use the `appId` from the firebaseConfig for the collection path
             const configuredAppId = firebaseConfig.appId;
 
             if (!db || !isAuthReady || !currentUserId || !configuredAppId) {
@@ -569,7 +560,6 @@
                 return;
             }
 
-            // Corrected collection path
             const bookingsCollectionRef = collection(db, `artifacts/${configuredAppId}/public/data/bookings`);
             console.log("Setting up real-time listener for bookings at:", `artifacts/${configuredAppId}/public/data/bookings`);
 
@@ -578,7 +568,6 @@
                     id: doc.id,
                     ...doc.data()
                 }));
-                // Sort bookings by timestamp in descending order (most recent first)
                 fetchedBookings.sort((a, b) => (b.timestamp?.toDate() || 0) - (a.timestamp?.toDate() || 0));
                 renderBookings(fetchedBookings);
                 console.log("Bookings updated:", fetchedBookings);
@@ -594,7 +583,7 @@
 
         // Render bookings to the DOM
         function renderBookings(bookings) {
-            bookingsListElem.innerHTML = ''; // Clear previous bookings
+            bookingsListElem.innerHTML = '';
             if (bookings.length === 0) {
                 noBookingsMessageElem.classList.remove('hidden');
             } else {
@@ -642,9 +631,8 @@
                 return;
             }
 
-            // Simulate payment processing
             paymentMessageElem.textContent = 'Processing payment...';
-            await new Promise(resolve => setTimeout(resolve, 2000)); // Simulate network delay
+            await new Promise(resolve => setTimeout(resolve, 2000));
 
             const selectedService = services.find(s => s.id === serviceId);
             if (!selectedService) {
@@ -655,7 +643,6 @@
                 return;
             }
 
-            // Use the `appId` from the firebaseConfig for the collection path
             const configuredAppId = firebaseConfig.appId;
 
             const bookingData = {
@@ -671,7 +658,6 @@
             };
 
             try {
-                // Ensure db, currentUserId, and configuredAppId are ready
                 if (!db || !currentUserId || !configuredAppId) {
                     throw new Error("Firestore not initialized, user not authenticated, or appId missing for writing.");
                 }
@@ -679,11 +665,11 @@
                 console.log("Attempting to add booking to Firestore:", bookingData);
                 await addDoc(bookingsCollectionRef, bookingData);
                 paymentMessageElem.textContent = 'Payment successful! Booking confirmed.';
-                paymentMessageElem.classList.remove('text-blue-600'); // Ensure color is removed if it was set
-                paymentMessageElem.classList.add('text-lime-400'); // Add success color
+                paymentMessageElem.classList.remove('text-blue-600');
+                paymentMessageElem.classList.add('text-lime-400');
                 confirmButton.textContent = 'Booking Confirmed!';
-                bookingForm.reset(); // Clear form
-                bookingSummaryElem.classList.add('hidden'); // Hide summary
+                bookingForm.reset();
+                bookingSummaryElem.classList.add('hidden');
             } catch (err) {
                 console.error("Error saving booking:", err);
                 if (err.code === 'permission-denied' || (err.message && err.message.includes('Missing or insufficient permissions'))) {
@@ -691,11 +677,10 @@
                 } else {
                     displayError(`Failed to confirm booking: ${err.message}. Please try again.`);
                 }
-                paymentMessageElem.textContent = ''; // Clear processing message on error
+                paymentMessageElem.textContent = '';
             } finally {
                 confirmButton.disabled = false;
                 confirmButton.classList.remove('opacity-50', 'cursor-not-allowed');
-                // If not confirmed, reset button text
                 if (paymentMessageElem.textContent !== 'Payment successful! Booking confirmed.') {
                     confirmButton.textContent = 'Confirm Booking';
                 }
@@ -708,7 +693,6 @@
                 mainNav.classList.toggle('nav-open');
             });
 
-            // Close mobile nav when a link is clicked (for smooth scrolling)
             mainNav.querySelectorAll('a').forEach(link => {
                 link.addEventListener('click', () => {
                     if (mainNav.classList.contains('nav-open')) {
@@ -721,8 +705,8 @@
 
         // Initialize on window load
         window.onload = () => {
-            setupFirebaseAuthentication(); // This will handle auth and then start listening for bookings
-            updateBookingSummary(); // Initial update in case fields are pre-filled
+            setupFirebaseAuthentication();
+            updateBookingSummary();
         };
     </script>
 </body>
