@@ -1,512 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AntBite Studios</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <!-- Tailwind CSS CDN -->
+    <link rel="stylesheet" type="text/css" href="index_css.css" />
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
+        // Tailwind CSS configuration for custom colors and fonts
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: {
-                        // Poppins is set in the main CSS, but keeping 'inter' available for specific elements if needed.
-                        inter: ['Inter', 'sans-serif'],
-                        poppins: ['Poppins', 'sans-serif'],
+                        poppins: ['Poppins', 'sans-serif'], // Defined Poppins here for Tailwind
                     },
                     colors: {
-                        // Define your accent color for easier use in Tailwind classes
                         'antbite-yellow': '#f5b500',
                         'antbite-dark': '#222',
                         'antbite-medium': '#333',
-                        'antbite-light-dark': '#262626', // rgba(38, 38, 38, 0.85) is close to this
+                        'antbite-light-dark': '#262626',
                     }
                 },
             },
         };
     </script>
-    <style>
-        /* Custom styles from your original code */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            scroll-behavior: smooth;
-        }
-        body {
-            font-family: 'Poppins', sans-serif; /* Main font set here */
-            line-height: 1.6;
-            color: #f5b500; /* Main text color for contrast */
-            overflow-x: hidden;
-            background-color: #222; /* Dark background for the overall page */
-        }
-        a {
-            color: #f5b500;
-            text-decoration: none;
-        }
-        h1, h2, h3 {
-            font-weight: 700;
-            color: #f5b500;
-        }
-        p {
-            font-weight: 300;
-            color: #f5b500;
-        }
-
-        /* Navigation Bar */
-        nav {
-            position: fixed;
-            width: 100%;
-            background: rgba(17, 17, 17, 0.8); /* Darker and more transparent */
-            padding: 1rem 2rem;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            z-index: 1000;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            backdrop-filter: saturate(180%) blur(10px); /* Kept for frosted effect */
-        }
-        nav img {
-            height: 40px;
-            max-width: 160px;
-            object-fit: contain;
-        }
-        nav ul {
-            list-style: none;
-            display: flex;
-            gap: 20px;
-            /* Default for desktop */
-        }
-        nav ul li a {
-            padding: 10px 15px;
-            border-radius: 5px;
-            transition: background 0.3s;
-            font-weight: 600;
-            color: #f5b500; /* Changed text color to yellow for better contrast */
-        }
-        nav ul li a:hover {
-            background: #444;
-            color: #f5b500;
-        }
-
-        /* Hamburger menu button */
-        .menu-button {
-            display: none; /* Hidden by default on desktop */
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 10px;
-            z-index: 1001; /* Above nav links when open */
-        }
-        .menu-button svg {
-            fill: #f5b500; /* Yellow color for the icon */
-            width: 30px;
-            height: 30px;
-        }
-
-        /* Hero Section */
-        .hero {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            color: #f5b500;
-            padding: 0 1rem;
-            position: relative;
-            overflow: hidden;
-            /* Original background image path */
-            background-image: url("495169740_122100239480857556_953647874393082750_n.jpg");
-            background-size: cover;
-            background-position: center;
-        }
-        .hero h2 {
-            font-size: 48px;
-            margin-bottom: 20px;
-            max-width: 900px;
-            line-height: 1.1;
-            position: relative;
-            z-index: 2; /* Ensure text is above any potential video overlay */
-            text-shadow: 0 0 8px rgba(0, 0, 0, 0.9);
-        }
-
-        /* Call to Action Button */
-        .cta-button {
-            position: fixed;
-            right: 30px;
-            bottom: 30px;
-            z-index: 2000;
-            background-color: #444;
-            color: #f5b500;
-            padding: 15px 40px;
-            border-radius: 30px;
-            font-weight: bold;
-            font-size: 1.2rem;
-            transition: background 0.3s, transform 0.2s;
-            box-shadow: 0 0 10px rgba(245, 181, 0, 0.7);
-            border: none;
-            cursor: pointer;
-            user-select: none;
-            text-align: center;
-        }
-        .cta-button:hover {
-            background-color: #111;
-            color: #f5b500;
-            transform: scale(1.05);
-            box-shadow: 0 0 20px rgba(245, 181, 0, 0.9);
-        }
-
-        /* Section Styling (About, Vision, Services, Objectives, Portfolio, Team) */
-        section {
-            padding: 80px 20px;
-            text-align: center;
-            background: rgba(38, 38, 38, 0.85); /* Dark semi-transparent background */
-            max-width: 1200px;
-            margin: 0 auto 60px auto; /* Centered with bottom margin */
-            border-radius: 12px;
-            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
-        }
-        section h2 {
-            font-size: 36px;
-            margin-bottom: 20px;
-            position: relative;
-            font-weight: 700;
-        }
-        section h2::after {
-            content: "";
-            display: block;
-            margin: 10px auto;
-            width: 80px;
-            height: 4px;
-            background-color: #f5b500; /* Accent color underline */
-            border-radius: 2px;
-        }
-        section p {
-            max-width: 800px;
-            margin: 0 auto;
-            font-size: 18px;
-        }
-
-        /* Vision & Mission Specific */
-        .vision-mission {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            flex-wrap: wrap;
-        }
-        .vision-mission > div {
-            max-width: 450px;
-            background: #333;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        .vision-mission > div:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 14px 25px rgba(245, 181, 0, 0.8);
-        }
-        .vision-mission h3 {
-            margin-bottom: 15px;
-        }
-
-        /* Service Cards */
-        .service-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-            max-width: 700px; /* Constrain width for better layout */
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .card {
-            background: #333;
-            border-radius: 12px;
-            padding: 25px;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
-            transition: transform 0.3s, box-shadow 0.3s;
-            color: #f5b500;
-            cursor: default;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            user-select: none;
-        }
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 14px 25px rgba(245, 181, 0, 0.8);
-        }
-        .card h3 {
-            margin-bottom: 15px;
-            color: #f5b500;
-            font-size: 1.6rem;
-            font-weight: 700;
-        }
-
-        /* Objectives List */
-        #objectives ul {
-            list-style: none;
-            padding: 0;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            margin-top: 40px;
-            max-width: 900px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        #objectives li {
-            background: #333;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
-            position: relative;
-            color: #f5b500;
-            font-size: 1.2rem;
-            font-weight: 500;
-            user-select: none;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        #objectives li:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(245, 181, 0, 0.8);
-        }
-
-        /* Portfolio Gallery */
-        #portfolio .portfolio-gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            padding: 1rem 0;
-            margin-top: 40px; /* Add margin to separate from h2 */
-        }
-
-        #portfolio .portfolio-gallery div {
-            overflow: hidden;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            background: #333; /* Match card background */
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        #portfolio .portfolio-gallery div:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 14px 25px rgba(245, 181, 0, 0.8);
-        }
-
-        #portfolio .portfolio-gallery img,
-        #portfolio .portfolio-gallery video {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-            display: block;
-        }
-
-        /* Team Profiles */
-        .team-profiles {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-            max-width: 1100px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .team-profiles > div {
-            background: #333;
-            padding: 30px 20px;
-            border-radius: 15px;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-            text-align: center;
-            color: #f5b500;
-            user-select: none;
-            cursor: default;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        .team-profiles > div:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(245, 181, 0, 0.8);
-        }
-        .team-profiles img {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 15px;
-            box-shadow: 0 0 15px rgba(245, 181, 0, 0.8);
-        }
-        .team-profiles h3 {
-            color: #f5b500;
-            margin-bottom: 8px;
-            font-size: 1.5rem;
-            font-weight: 700;
-        }
-        .team-profiles p {
-            font-weight: 400;
-            font-size: 1.1rem;
-            max-width: 250px;
-        }
-
-        /* Footer */
-        footer {
-            background: #111;
-            color: #f5b500;
-            text-align: center;
-            padding: 30px 20px;
-            margin-top: 60px;
-            font-size: 0.9rem;
-            user-select: none;
-            display: flex;
-            flex-direction: column; /* Ensure vertical stacking on small screens */
-            align-items: center;
-            gap: 20px; /* Space between elements */
-        }
-        .social-icons {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            /* No margin-top/bottom here, let gap handle spacing */
-        }
-        .social-icons img {
-            width: 40px;
-            height: auto;
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
-        .social-icons img:hover {
-            transform: scale(1.1);
-        }
-
-        /* Back to Top Button in Footer */
-        .back-to-top-button {
-            background-color: #f5b500;
-            color: #222;
-            padding: 10px 20px;
-            border-radius: 20px;
-            font-weight: bold;
-            font-size: 0.9rem;
-            transition: background 0.3s, transform 0.2s;
-            box-shadow: 0 0 8px rgba(245, 181, 0, 0.7);
-            border: none;
-            cursor: pointer;
-            user-select: none;
-            text-align: center;
-            display: inline-block; /* Allows padding and margin */
-            margin-top: 10px; /* Space from other footer content */
-        }
-        .back-to-top-button:hover {
-            background-color: #e0a800;
-            transform: scale(1.05);
-            box-shadow: 0 0 15px rgba(245, 181, 0, 0.9);
-        }
-
-        /* Custom styles for date/time picker indicators */
-        input[type="date"]::-webkit-calendar-picker-indicator,
-        input[type="time"]::-webkit-calendar-picker-indicator {
-            /* Invert for dark theme, then apply a yellow tint */
-            filter: invert(1) hue-rotate(200deg) saturate(5) brightness(1.5);
-            cursor: pointer;
-        }
-
-        /* Responsive Adjustments */
-        @media (max-width: 768px) {
-            .hero h2 {
-                font-size: 36px;
-            }
-            /* Hide regular nav links on mobile */
-            nav ul {
-                display: none;
-                flex-direction: column;
-                position: absolute;
-                top: 60px; /* Below the logo */
-                left: 0;
-                width: 100%;
-                background: rgba(17, 17, 17, 0.95); /* Darker background for open menu */
-                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-                padding: 1rem 0;
-                gap: 5px;
-                align-items: center;
-                animation: slideDown 0.3s ease-out forwards; /* Smooth animation */
-            }
-
-            /* Show nav links when menu is open */
-            nav ul.nav-open {
-                display: flex;
-            }
-
-            /* Show menu button on mobile */
-            .menu-button {
-                display: block;
-            }
-
-            nav {
-                flex-direction: row; /* Keep logo and menu button in a row */
-                justify-content: space-between; /* Space them out */
-                padding: 0.75rem 1rem; /* Adjust padding for mobile nav */
-            }
-            nav img {
-                margin-bottom: 0; /* Remove margin */
-            }
-            section {
-                padding: 50px 15px;
-            }
-            .service-cards, #objectives ul, .team-profiles {
-                grid-template-columns: 1fr;
-            }
-            .team-profiles > div {
-                max-width: 320px;
-                margin: 0 auto;
-            }
-            .cta-button {
-                padding: 12px 30px;
-                font-size: 1rem;
-                right: 15px;
-                bottom: 15px;
-            }
-            /* Removed .next-page-button specific mobile styles as it's removed */
-            /* Footer specific adjustments for mobile */
-            footer {
-                padding: 20px 15px;
-                gap: 15px; /* Reduce gap on smaller screens */
-            }
-            .social-icons {
-                flex-direction: row; /* Keep social icons in a row, but wrap if needed */
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 10px;
-            }
-        }
-
-        /* Animation for dropdown menu */
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-    </style>
 </head>
 <body>
 
     <nav>
         <img src="Logo white text.png" alt="AntBite Studios Logo" />
-        <!-- Hamburger menu button for mobile -->
-        <button class="menu-button" id="menuButton" aria-label="Toggle navigation menu">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
-            </svg>
-        </button>
         <ul id="mainNav">
             <li><a href="#about">About</a></li>
             <li><a href="#vision">Vision & Mission</a></li>
@@ -517,6 +41,11 @@
             <li><a href="#booking-section">Book Now</a></li>
             <li><a href="next-page.html">Next Page</a></li>
         </ul>
+        <button id="menuButton" class="menu-button">
+            <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM9 15a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z" clip-rule="evenodd"></path>
+            </svg>
+        </button>
     </nav>
 
     <header class="hero">
@@ -524,7 +53,7 @@
     </header>
 
     <a href="#footer-contact" class="cta-button">Contact Us</a>
-    <!-- Removed the floating "Explore More" button as requested -->
+    <a href="next-page.html" class="next-page-button">Explore More</a>
 
     <section id="about">
         <h2>About Us</h2>
@@ -682,129 +211,110 @@
         </div>
     </section>
 
-    <!-- Booking System Section -->
-   <section id="booking-section" class="bg-antbite-light-dark text-antbite-yellow max-w-4xl w-full my-8 mx-auto p-8 md:p-10 lg:p-12 shadow-2xl rounded-xl">
-    <h2 class="text-4xl md:text-5xl font-extrabold text-center mb-8">
-        Book Your Service
-    </h2>
+    <section id="booking-section" class="bg-antbite-light-dark text-antbite-yellow mx-auto my-8 w-full max-w-4xl rounded-xl p-8 shadow-2xl md:p-10 lg:p-12">
+        <h2 class="mb-8 text-center text-4xl font-extrabold md:text-5xl">
+            Book Your Service
+        </h2>
 
-    <div id="error-message" class="hidden bg-red-800 border border-red-600 text-red-200 px-4 py-3 rounded-md relative mb-6" role="alert">
-        <strong class="font-bold">Error!</strong>
-        <span id="error-text" class="block sm:inline"></span>
-    </div>
-
-    <form id="booking-form" class="space-y-6">
-        <div>
-            <label for="service" class="block text-lg font-medium text-gray-300 mb-2">
-                Select Service
-            </label>
-            <select
-                id="service"
-                name="service"
-                class="mt-1 block w-full pl-3 pr-10 py-3 text-base bg-gray-700 text-gray-200 border-gray-600 focus:outline-none focus:ring-antbite-yellow focus:border-antbite-yellow sm:text-lg rounded-md shadow-sm transition duration-150 ease-in-out z-10 relative"
-                required
-            >
-                <option value="">-- Choose a service --</option>
-
-                <optgroup label="Print Services">
-                    <option value="business-cards">Business Card Design & Print</option>
-                    <option value="flyers-brochures">Flyer & Brochure Design & Print</option>
-                    <option value="stickers-labels">Sticker & Label Printing</option>
-                    <option value="posters-banners">Poster & Banner Printing</option>
-                    <option value="letterheads-envelopes">Letterhead & Envelope Printing</option>
-                    <option value="merchandise-printing">Customized Merchandise Printing</option>
-                    <option value="large-format-printing">Large Format Printing</option>
-                    <option value="invitation-design">Invitation Design & Print</option>
-                    <option value="packaging-design">Packaging Design & Print</option>
-                </optgroup>
-
-                <optgroup label="Craft & Creative Services">
-                    <option value="logo-design">Logo Design & Branding Packages</option>
-                    <option value="social-media-graphics">Graphic Design for Social Media</option>
-                    <option value="custom-illustration">Custom Illustration & Artwork</option>
-                    <option value="custom-decals">Custom Decals & Vinyl Cutting</option>
-                    <option value="personalized-gifts">Personalized Gifts & Decor</option>
-                    <option value="engraving-services">Engraving Services</option>
-                    <option value="fabric-printing">Fabric Printing & Custom Apparel</option>
-                    <option value="creative-consultation">Creative Project Consultation</option>
-                </optgroup>
-            </select>
+        <div id="error-message" class="relative mb-6 hidden rounded-md border border-red-600 bg-red-800 px-4 py-3 text-red-200" role="alert">
+            <strong class="font-bold">Error!</strong>
+            <span id="error-text" class="block sm:inline"></span>
         </div>
-        </form>
-</section>
 
-            <!-- Date and Time Selection -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <form id="booking-form" class="space-y-6">
+            <div>
+                <label for="service" class="mb-2 block text-lg font-medium text-gray-300">
+                    Select Service
+                </label>
+                <select id="service"
+                        name="service"
+                        class="form-select mt-1 block w-full rounded-md border-gray-600 bg-gray-700 py-3 pl-3 pr-10 text-base text-gray-200 shadow-sm transition duration-150 ease-in-out focus:ring-antbite-yellow focus:border-antbite-yellow focus:outline-none sm:text-lg"
+                        required>
+                    <option value="">-- Choose a service --</option>
+                    <optgroup label="Print Services">
+                        <option value="business-cards">Business Card Design & Print</option>
+                        <option value="flyers-brochures">Flyer & Brochure Design & Print</option>
+                        <option value="stickers-labels">Sticker & Label Printing</option>
+                        <option value="posters-banners">Poster & Banner Printing</option>
+                        <option value="letterheads-envelopes">Letterhead & Envelope Printing</option>
+                        <option value="merchandise-printing">Customized Merchandise Printing</option>
+                        <option value="large-format-printing">Large Format Printing</option>
+                        <option value="invitation-design">Invitation Design & Print</option>
+                        <option value="packaging-design">Packaging Design & Print</option>
+                    </optgroup>
+
+                    <optgroup label="Craft & Creative Services">
+                        <option value="logo-design">Logo Design & Branding Packages</option>
+                        <option value="social-media-graphics">Graphic Design for Social Media</option>
+                        <option value="custom-illustration">Custom Illustration & Artwork</option>
+                        <option value="custom-decals">Custom Decals & Vinyl Cutting</option>
+                        <option value="personalized-gifts">Personalized Gifts & Decor</option>
+                        <option value="engraving-services">Engraving Services</option>
+                        <option value="fabric-printing">Fabric Printing & Custom Apparel</option>
+                        <option value="creative-consultation">Creative Project Consultation</option>
+                    </optgroup>
+                </select>
+            </div>
+
+            <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
                 <div>
-                    <label for="date" class="block text-lg font-medium text-gray-300 mb-2">
+                    <label for="date" class="mb-2 block text-lg font-medium text-gray-300">
                         Date
                     </label>
-                    <input
-                        type="date"
-                        id="date"
-                        name="date"
-                        class="mt-1 block w-full px-4 py-3 bg-gray-700 text-gray-200 border border-gray-600 rounded-md shadow-sm focus:ring-antbite-yellow focus:border-antbite-yellow sm:text-lg transition duration-150 ease-in-out"
-                        required
-                    />
+                    <input type="date"
+                           id="date"
+                           name="date"
+                           class="mt-1 block w-full rounded-md border border-gray-600 bg-gray-700 px-4 py-3 text-gray-200 shadow-sm transition duration-150 ease-in-out focus:ring-antbite-yellow focus:border-antbite-yellow sm:text-lg"
+                           required />
                 </div>
                 <div>
-                    <label for="time" class="block text-lg font-medium text-gray-300 mb-2">
+                    <label for="time" class="mb-2 block text-lg font-medium text-gray-300">
                         Time
                     </label>
-                    <input
-                        type="time"
-                        id="time"
-                        name="time"
-                        class="mt-1 block w-full px-4 py-3 bg-gray-700 text-gray-200 border border-gray-600 rounded-md shadow-sm focus:ring-antbite-yellow focus:border-antbite-yellow sm:text-lg transition duration-150 ease-in-out"
-                        required
-                    />
+                    <input type="time"
+                           id="time"
+                           name="time"
+                           class="mt-1 block w-full rounded-md border border-gray-600 bg-gray-700 px-4 py-3 text-gray-200 shadow-sm transition duration-150 ease-in-out focus:ring-antbite-yellow focus:border-antbite-yellow sm:text-lg"
+                           required />
                 </div>
             </div>
 
-            <!-- User Details -->
             <div>
-                <label for="name" class="block text-lg font-medium text-gray-300 mb-2">
+                <label for="name" class="mb-2 block text-lg font-medium text-gray-300">
                     Full Name
                 </label>
-                <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    class="mt-1 block w-full px-4 py-3 bg-gray-700 text-gray-200 border border-gray-600 rounded-md shadow-sm focus:ring-antbite-yellow focus:border-antbite-yellow sm:text-lg transition duration-150 ease-in-out"
-                    placeholder="John Doe"
-                    required
-                />
+                <input type="text"
+                       id="name"
+                       name="name"
+                       class="mt-1 block w-full rounded-md border border-gray-600 bg-gray-700 px-4 py-3 text-gray-200 shadow-sm transition duration-150 ease-in-out focus:ring-antbite-yellow focus:border-antbite-yellow sm:text-lg"
+                       placeholder="John Doe"
+                       required />
             </div>
             <div>
-                <label for="email" class="block text-lg font-medium text-gray-300 mb-2">
+                <label for="email" class="mb-2 block text-lg font-medium text-gray-300">
                     Email Address
                 </label>
-                <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    class="mt-1 block w-full px-4 py-3 bg-gray-700 text-gray-200 border border-gray-600 rounded-md shadow-sm focus:ring-antbite-yellow focus:border-antbite-yellow sm:text-lg transition duration-150 ease-in-out"
-                    placeholder="john.doe@example.com"
-                    required
-                />
+                <input type="email"
+                       id="email"
+                       name="email"
+                       class="mt-1 block w-full rounded-md border border-gray-600 bg-gray-700 px-4 py-3 text-gray-200 shadow-sm transition duration-150 ease-in-out focus:ring-antbite-yellow focus:border-antbite-yellow sm:text-lg"
+                       placeholder="john.doe@example.com"
+                       required />
             </div>
             <div>
-                <label for="phone" class="block text-lg font-medium text-gray-300 mb-2">
+                <label for="phone" class="mb-2 block text-lg font-medium text-gray-300">
                     Phone Number
                 </label>
-                <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    class="mt-1 block w-full px-4 py-3 bg-gray-700 text-gray-200 border border-gray-600 rounded-md shadow-sm focus:ring-antbite-yellow focus:border-antbite-yellow sm:text-lg transition duration-150 ease-in-out"
-                    placeholder="+1 (555) 123-4567"
-                    required
-                />
+                <input type="tel"
+                       id="phone"
+                       name="phone"
+                       class="mt-1 block w-full rounded-md border border-gray-600 bg-gray-700 px-4 py-3 text-gray-200 shadow-sm transition duration-150 ease-in-out focus:ring-antbite-yellow focus:border-antbite-yellow sm:text-lg"
+                       placeholder="+1 (555) 123-4567"
+                       required />
             </div>
 
-            <!-- Booking Summary -->
-            <div id="booking-summary" class="hidden bg-neutral-700 border-l-4 border-antbite-yellow p-4 rounded-md shadow-inner">
-                <h2 class="text-xl font-semibold text-antbite-yellow mb-3">Booking Summary</h2>
+            <div id="booking-summary" class="border-antbite-yellow hidden rounded-md border-l-4 bg-neutral-700 p-4 shadow-inner">
+                <h2 class="text-antbite-yellow mb-3 text-xl font-semibold">Booking Summary</h2>
                 <p class="text-gray-300"><span class="font-medium">Service:</span> <span id="summary-service"></span></p>
                 <p class="text-gray-300"><span class="font-medium">Date:</span> <span id="summary-date"></span></p>
                 <p class="text-gray-300"><span class="font-medium">Time:</span> <span id="summary-time"></span></p>
@@ -814,21 +324,18 @@
                 <p class="text-gray-300"><span class="font-medium">Phone:</span> <span id="summary-phone"></span></p>
             </div>
 
-            <!-- Payment Section -->
             <div class="pt-6">
-                <h2 class="text-2xl font-bold text-antbite-yellow mb-4">Payment Information</h2>
-                <div class="bg-neutral-700 p-6 rounded-lg shadow-inner">
-                    <p class="text-gray-300 mb-4">
+                <h2 class="text-antbite-yellow mb-4 text-2xl font-bold">Payment Information</h2>
+                <div class="rounded-lg bg-neutral-700 p-6 shadow-inner">
+                    <p class="mb-4 text-gray-300">
                         This is a placeholder for a secure payment gateway integration. In a real application,
                         you would see fields for credit card details or options for other payment methods (e.g., PayPal, Stripe).
                         Click "Confirm Booking" to simulate payment and finalize your appointment.
                     </p>
-                    <p id="payment-message" class="text-center font-semibold text-lg mb-4"></p>
-                    <button
-                        type="submit"
-                        id="confirm-button"
-                        class="w-full bg-antbite-yellow hover:bg-yellow-600 text-gray-900 font-bold py-3 px-6 rounded-lg shadow-md transition duration-200 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-antbite-yellow focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
-                    >
+                    <p id="payment-message" class="mb-4 text-center text-lg font-semibold"></p>
+                    <button type="submit"
+                            id="confirm-button"
+                            class="bg-antbite-yellow w-full transform rounded-lg px-6 py-3 font-bold text-gray-900 shadow-md transition duration-200 ease-in-out hover:scale-105 hover:bg-yellow-600 focus:ring-antbite-yellow focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">
                         Confirm Booking
                     </button>
                 </div>
@@ -836,14 +343,12 @@
         </form>
     </section>
 
-    <!-- Display Existing Bookings -->
-    <section id="bookings-section" class="bg-antbite-light-dark text-antbite-yellow max-w-4xl w-full my-8 mx-auto p-8 md:p-10 lg:p-12 shadow-2xl rounded-xl">
-        <h2 class="text-3xl font-extrabold text-center mb-6">
+    <section id="bookings-section" class="bg-antbite-light-dark text-antbite-yellow mx-auto my-8 w-full max-w-4xl rounded-xl p-8 shadow-2xl md:p-10 lg:p-12">
+        <h2 class="mb-6 text-center text-3xl font-extrabold">
             Your Bookings (<span id="current-user-id">Loading...</span>)
         </h2>
         <div id="bookings-list" class="space-y-4">
-            <p class="text-center text-gray-300 text-lg" id="no-bookings-message">No bookings yet. Make one above!</p>
-            <!-- Bookings will be populated here by JavaScript -->
+            <p class="text-center text-lg text-gray-300" id="no-bookings-message">No bookings yet. Make one above!</p>
         </div>
     </section>
 
@@ -864,44 +369,70 @@
             </a>
         </div>
         <p>Contact us: antbitestudios.com | 0962-557-0863</p>
-        <p>&copy; 2025 AntBite Studios. All rights reserved.</p>
+        <p>© 2025 AntBite Studios. All rights reserved.</p>
         <a href="#" onclick="window.scrollTo({ top: 0, behavior: 'smooth' }); return false;" class="back-to-top-button">Back to Top</a>
     </footer>
 
-    <!-- Firebase SDKs and Booking Logic -->
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, collection, addDoc, onSnapshot, query, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        // --- Firebase Imports ---
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
+        // Import getAnalytics only if you plan to use it. If not, it can be removed.
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-analytics.js";
+        import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
+        import { getFirestore, collection, addDoc, onSnapshot, query, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
-        // Global variables provided by the Canvas environment
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
-        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null; 
+        // --- Firebase Configuration ---
+        // Your Firebase configuration. This should be copied directly from your Firebase Project Settings.
+        const firebaseConfig = {
+            apiKey: "AIzaSyBFhwhlK68WwoGHFCWkgJ74J36YgDiXcyg",
+            authDomain: "ant-bite.firebaseapp.com",
+            projectId: "ant-bite",
+            storageBucket: "ant-bite.firebasestorage.app",
+            messagingSenderId: "561572516388",
+            appId: "1:561572516388:web:30a72e46a6219889d43eb1",
+            measurementId: "G-GPS3XD3HT7"
+        };
 
-        // Initialize Firebase
-        let app;
-        let db;
-        let auth;
+        // --- Initialize Firebase Services ONCE ---
+        // These are declared as `const` at the top level of the module,
+        // making them available throughout the script.
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app); // Initialized here if needed.
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+
+        // --- Global State Variables ---
+        // Use `let` for variables that will change.
         let currentUserId = null;
-        let isAuthReady = false;
+        let isAuthReady = false; // Flag to indicate if Firebase Auth state has been determined
 
-        try {
-            app = initializeApp(firebaseConfig);
-            db = getFirestore(app);
-            auth = getAuth(app);
-        } catch (error) {
-            console.error("Firebase initialization failed:", error);
-            displayError("Firebase initialization failed. Booking features may be limited.");
-        }
+        // No need for a try-catch block around the initial `initializeApp`, `getFirestore`, `getAuth` calls here,
+        // as they are handled above. Any errors during the initial Firebase setup will occur
+        // at script load time and typically show in the console.
 
-        // Services available for booking (adjusted names to match your h3 titles)
+        // Services available for booking - MUST MATCH YOUR HTML OPTION VALUES AND TEXT
         const services = [
-            { id: 'digital', name: 'Digital', price: 150 },
-            { id: 'traditional', name: 'Traditional', price: 250 },
-            { id: 'media', name: 'Media', price: 200 },
-            { id: 'branding', name: 'Branding', price: 100 },
+            // Print Services (IDs and names must match HTML values and text)
+            { id: 'business-cards', name: 'Business Card Design & Print', price: 500 },
+            { id: 'flyers-brochures', name: 'Flyer & Brochure Design & Print', price: 300 },
+            { id: 'stickers-labels', name: 'Sticker & Label Printing', price: 100 },
+            { id: 'posters-banners', name: 'Poster & Banner Printing', price: 400 },
+            { id: 'letterheads-envelopes', name: 'Letterhead & Envelope Printing', price: 250 },
+            { id: 'merchandise-printing', name: 'Customized Merchandise Printing', price: 700 },
+            { id: 'large-format-printing', name: 'Large Format Printing', price: 1000 },
+            { id: 'invitation-design', name: 'Invitation Design & Print', price: 350 },
+            { id: 'packaging-design', name: 'Packaging Design & Print', price: 600 },
+            // Craft & Creative Services (IDs and names must match HTML values and text)
+            { id: 'logo-design', name: 'Logo Design & Branding Packages', price: 800 },
+            { id: 'social-media-graphics', name: 'Graphic Design for Social Media', price: 200 },
+            { id: 'custom-illustration', name: 'Custom Illustration & Artwork', price: 450 },
+            { id: 'custom-decals', name: 'Custom Decals & Vinyl Cutting', price: 150 },
+            { id: 'personalized-gifts', name: 'Personalized Gifts & Decor', price: 250 },
+            { id: 'engraving-services', name: 'Engraving Services', price: 300 },
+            { id: 'fabric-printing', name: 'Fabric Printing & Custom Apparel', price: 550 },
+            { id: 'creative-consultation', name: 'Creative Project Consultation', price: 180 },
         ];
+
 
         // DOM elements for the booking section
         const serviceSelect = document.getElementById('service');
@@ -920,27 +451,17 @@
         const noBookingsMessageElem = document.getElementById('no-bookings-message');
         const currentUserIdElem = document.getElementById('current-user-id');
 
-        // New DOM elements for mobile menu
+        // New DOM elements for mobile menu (Ensure these elements exist in your HTML if used)
         const menuButton = document.getElementById('menuButton');
         const mainNav = document.getElementById('mainNav');
 
-
-        // Populate service options
-        function populateServices() {
-            serviceSelect.innerHTML = '<option value="">-- Choose a service --</option>'; // Clear and add default
-            services.forEach(s => {
-                const option = document.createElement('option');
-                option.value = s.id;
-                option.textContent = s.name; // Display ONLY the service name, no price
-                serviceSelect.appendChild(option);
-            });
-            console.log("Services populated in dropdown."); // Added for debugging
-        }
 
         // Display error message
         function displayError(message) {
             errorTextElem.textContent = message;
             errorMessageElem.classList.remove('hidden');
+            // Scroll to error message for visibility
+            errorMessageElem.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
 
         // Hide error message
@@ -951,6 +472,7 @@
 
         // Update booking summary
         function updateBookingSummary() {
+            // Find the selected service based on its value
             const selectedService = services.find(s => s.id === serviceSelect.value);
             const date = dateInput.value;
             const time = timeInput.value;
@@ -958,6 +480,7 @@
             const email = emailInput.value;
             const phone = phoneInput.value;
 
+            // Only show summary if all basic required fields are filled and a service is selected
             if (selectedService && date && time && name && email && phone) {
                 document.getElementById('summary-service').textContent = selectedService.name;
                 document.getElementById('summary-date').textContent = date;
@@ -987,53 +510,68 @@
         // Event listeners for updating summary
         [serviceSelect, dateInput, timeInput, nameInput, emailInput, phoneInput].forEach(input => {
             input.addEventListener('change', updateBookingSummary);
-            input.addEventListener('keyup', updateBookingSummary); // For text inputs
+            // Use 'input' event for immediate feedback on text inputs
+            if (['text', 'email', 'tel', 'date', 'time'].includes(input.type)) {
+                input.addEventListener('input', updateBookingSummary);
+            }
         });
+
 
         // Firebase Authentication Setup
         async function setupFirebaseAuthentication() {
             try {
-                if (initialAuthToken) {
-                    await signInWithCustomToken(auth, initialAuthToken);
-                    console.log("Attempting sign-in with custom token.");
-                } else {
-                    await signInAnonymously(auth);
-                    console.log("Attempting anonymous sign-in.");
-                }
-                console.log("Firebase authentication initiated.");
+                // We directly attempt anonymous sign-in here.
+                // The `initialAuthToken` variable was not defined and is not typical for anonymous auth.
+                // Removed the `if (auth)` check, as `auth` is now globally defined.
+                await signInAnonymously(auth);
+                console.log("Attempting anonymous sign-in.");
+                console.log("Firebase authentication initiated and successful.");
             } catch (e) {
                 console.error("Firebase authentication failed during setup:", e);
-                displayError("Failed to authenticate with Firebase. Booking features may be limited. Check your Firebase config and network.");
+                displayError("Failed to authenticate with Firebase. Booking features may be limited. Check your console and Firebase config.");
+                // Fallback: Assign a random ID and proceed, but log an error.
+                currentUserId = crypto.randomUUID();
+                currentUserIdElem.textContent = currentUserId;
+            } finally {
+                isAuthReady = true; // Auth state is ready regardless of success or fallback
+                console.log("Firebase authentication state is ready. isAuthReady:", isAuthReady);
+                listenForBookings(); // Start listening for bookings once auth is ready
             }
         }
 
         // Listen for auth state changes
+        // This is the primary way to know if a user is signed in.
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 currentUserId = user.uid;
                 currentUserIdElem.textContent = user.uid;
                 console.log("User authenticated. User ID:", user.uid);
             } else {
-                // This branch should ideally not be hit if signInAnonymously succeeds,
-                // but good for robustness.
-                currentUserId = crypto.randomUUID(); // Fallback for anonymous if auth fails
+                // This branch for when a user is signed out or anonymous sign-in fails
+                // It's good to keep this as a fallback if `setupFirebaseAuthentication` somehow fails
+                // or the user logs out later (though not implemented here).
+                currentUserId = crypto.randomUUID(); // Fallback to a random ID
                 currentUserIdElem.textContent = currentUserId;
-                console.log("No user authenticated. Using random ID:", currentUserId);
+                console.log("No user authenticated or signed out. Using random ID:", currentUserId);
             }
-            isAuthReady = true; // Auth state is ready
-            console.log("Firebase authentication state is ready. isAuthReady:", isAuthReady);
-            listenForBookings(); // Start listening for bookings once auth is ready
+            // `isAuthReady = true;` and `listenForBookings()` are handled in `setupFirebaseAuthentication`'s `finally` block
+            // to ensure they trigger after an explicit sign-in attempt, preventing double calls or race conditions.
         });
+
 
         // Listen for bookings in real-time
         function listenForBookings() {
-            if (!db || !isAuthReady || !currentUserId) {
-                console.log("Firestore not ready or user not authenticated for listening. Skipping booking listener setup.");
+            // Use the `appId` from the firebaseConfig for the collection path
+            const configuredAppId = firebaseConfig.appId;
+
+            if (!db || !isAuthReady || !currentUserId || !configuredAppId) {
+                console.log("Firestore not ready or user not authenticated or appId missing for listening. Skipping booking listener setup.");
                 return;
             }
 
-            const bookingsCollectionRef = collection(db, `artifacts/${appId}/public/data/bookings`);
-            console.log("Setting up real-time listener for bookings at:", `artifacts/${appId}/public/data/bookings`);
+            // Corrected collection path
+            const bookingsCollectionRef = collection(db, `artifacts/${configuredAppId}/public/data/bookings`);
+            console.log("Setting up real-time listener for bookings at:", `artifacts/${configuredAppId}/public/data/bookings`);
 
             onSnapshot(query(bookingsCollectionRef), (snapshot) => {
                 const fetchedBookings = snapshot.docs.map(doc => ({
@@ -1046,7 +584,6 @@
                 console.log("Bookings updated:", fetchedBookings);
             }, (err) => {
                 console.error("Error fetching bookings:", err);
-                // Suggest checking security rules for permission errors
                 if (err.code === 'permission-denied' || err.message.includes('Missing or insufficient permissions')) {
                     displayError("Failed to load bookings due to insufficient permissions. Please check your Firestore Security Rules.");
                 } else {
@@ -1066,16 +603,16 @@
                     const bookingDiv = document.createElement('div');
                     bookingDiv.className = 'bg-neutral-700 p-5 rounded-lg shadow-sm border border-neutral-600';
                     bookingDiv.innerHTML = `
-                        <h3 class="text-xl font-semibold text-antbite-yellow mb-2">${booking.service}</h3>
-                        <p class="text-gray-300"><span class="font-medium">Date:</span> ${booking.date}</p>
-                        <p class="text-gray-300"><span class="font-medium">Time:</span> ${booking.time}</p>
-                        <p class="text-300"><span class="font-medium">Name:</span> ${booking.name}</p>
-                        <p class="text-gray-300"><span class="font-medium">Email:</span> ${booking.email}</p>
-                        <p class="text-gray-300"><span class="font-medium">Phone:</span> ${booking.phone}</p>
-                        <p class="text-gray-300 text-sm mt-2">
-                            Booked on: ${booking.timestamp ? new Date(booking.timestamp.toDate()).toLocaleString() : 'N/A'}
-                        </p>
-                    `;
+                            <h3 class="text-antbite-yellow mb-2 text-xl font-semibold">${booking.service}</h3>
+                            <p class="text-gray-300"><span class="font-medium">Date:</span> ${booking.date}</p>
+                            <p class="text-gray-300"><span class="font-medium">Time:</span> ${booking.time}</p>
+                            <p class="text-gray-300"><span class="font-medium">Name:</span> ${booking.name}</p>
+                            <p class="text-gray-300"><span class="font-medium">Email:</span> ${booking.email}</p>
+                            <p class="text-gray-300"><span class="font-medium">Phone:</span> ${booking.phone}</p>
+                            <p class="mt-2 text-sm text-gray-300">
+                                Booked on: ${booking.timestamp ? new Date(booking.timestamp.toDate()).toLocaleString() : 'N/A'}
+                            </p>
+                        `;
                     bookingsListElem.appendChild(bookingDiv);
                 });
             }
@@ -1105,15 +642,6 @@
                 return;
             }
 
-            // Ensure Firebase is ready before attempting Firestore write
-            if (!db || !isAuthReady || !currentUserId) {
-                displayError("Firebase is not ready. Please wait a moment and try again. If the issue persists, check your Firebase authentication setup.");
-                confirmButton.disabled = false;
-                confirmButton.textContent = 'Confirm Booking';
-                confirmButton.classList.remove('opacity-50', 'cursor-not-allowed');
-                return;
-            }
-
             // Simulate payment processing
             paymentMessageElem.textContent = 'Processing payment...';
             await new Promise(resolve => setTimeout(resolve, 2000)); // Simulate network delay
@@ -1126,6 +654,9 @@
                 confirmButton.classList.remove('opacity-50', 'cursor-not-allowed');
                 return;
             }
+
+            // Use the `appId` from the firebaseConfig for the collection path
+            const configuredAppId = firebaseConfig.appId;
 
             const bookingData = {
                 service: selectedService.name,
@@ -1140,24 +671,27 @@
             };
 
             try {
-                const bookingsCollectionRef = collection(db, `artifacts/${appId}/public/data/bookings`);
+                // Ensure db, currentUserId, and configuredAppId are ready
+                if (!db || !currentUserId || !configuredAppId) {
+                    throw new Error("Firestore not initialized, user not authenticated, or appId missing for writing.");
+                }
+                const bookingsCollectionRef = collection(db, `artifacts/${configuredAppId}/public/data/bookings`);
                 console.log("Attempting to add booking to Firestore:", bookingData);
                 await addDoc(bookingsCollectionRef, bookingData);
                 paymentMessageElem.textContent = 'Payment successful! Booking confirmed.';
-                paymentMessageElem.classList.remove('text-blue-600'); // Remove old color
-                paymentMessageElem.classList.add('text-lime-400'); // Add new color for success
+                paymentMessageElem.classList.remove('text-blue-600'); // Ensure color is removed if it was set
+                paymentMessageElem.classList.add('text-lime-400'); // Add success color
                 confirmButton.textContent = 'Booking Confirmed!';
                 bookingForm.reset(); // Clear form
                 bookingSummaryElem.classList.add('hidden'); // Hide summary
             } catch (err) {
                 console.error("Error saving booking:", err);
-                // Suggest checking security rules for permission errors
-                if (err.code === 'permission-denied' || err.message.includes('Missing or insufficient permissions')) {
+                if (err.code === 'permission-denied' || (err.message && err.message.includes('Missing or insufficient permissions'))) {
                     displayError("Failed to confirm booking due to insufficient permissions. Please check your Firestore Security Rules.");
                 } else {
                     displayError(`Failed to confirm booking: ${err.message}. Please try again.`);
                 }
-                paymentMessageElem.textContent = '';
+                paymentMessageElem.textContent = ''; // Clear processing message on error
             } finally {
                 confirmButton.disabled = false;
                 confirmButton.classList.remove('opacity-50', 'cursor-not-allowed');
@@ -1168,24 +702,26 @@
             }
         });
 
-        // Toggle mobile navigation menu
-        menuButton.addEventListener('click', () => {
-            mainNav.classList.toggle('nav-open');
-        });
-
-        // Close mobile nav when a link is clicked (for smooth scrolling)
-        mainNav.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                if (mainNav.classList.contains('nav-open')) {
-                    mainNav.classList.remove('nav-open');
-                }
+        // Toggle mobile navigation menu (Only run if elements exist)
+        if (menuButton && mainNav) {
+            menuButton.addEventListener('click', () => {
+                mainNav.classList.toggle('nav-open');
             });
-        });
+
+            // Close mobile nav when a link is clicked (for smooth scrolling)
+            mainNav.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (mainNav.classList.contains('nav-open')) {
+                        mainNav.classList.remove('nav-open');
+                    }
+                });
+            });
+        }
+
 
         // Initialize on window load
         window.onload = () => {
-            populateServices();
-            setupFirebaseAuthentication();
+            setupFirebaseAuthentication(); // This will handle auth and then start listening for bookings
             updateBookingSummary(); // Initial update in case fields are pre-filled
         };
     </script>
