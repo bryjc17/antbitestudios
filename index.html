@@ -592,16 +592,16 @@
                     const bookingDiv = document.createElement('div');
                     bookingDiv.className = 'bg-neutral-700 p-5 rounded-lg shadow-sm border border-neutral-600';
                     bookingDiv.innerHTML = `
-                            <h3 class="text-antbite-yellow mb-2 text-xl font-semibold">${booking.service}</h3>
-                            <p class="text-gray-300"><span class="font-medium">Date:</span> ${booking.date}</p>
-                            <p class="text-gray-300"><span class="font-medium">Time:</span> ${booking.time}</p>
-                            <p class="text-gray-300"><span class="font-medium">Name:</span> ${booking.name}</p>
-                            <p class="text-gray-300"><span class="font-medium">Email:</span> ${booking.email}</p>
-                            <p class="text-gray-300"><span class="font-medium">Phone:</span> ${booking.phone}</p>
-                            <p class="mt-2 text-sm text-gray-300">
-                                Booked on: ${booking.timestamp ? new Date(booking.timestamp.toDate()).toLocaleString() : 'N/A'}
-                            </p>
-                        `;
+                                <h3 class="text-antbite-yellow mb-2 text-xl font-semibold">${booking.service}</h3>
+                                <p class="text-gray-300"><span class="font-medium">Date:</span> ${booking.date}</p>
+                                <p class="text-gray-300"><span class="font-medium">Time:</span> ${booking.time}</p>
+                                <p class="text-gray-300"><span class="font-medium">Name:</span> ${booking.name}</p>
+                                <p class="text-gray-300"><span class="font-medium">Email:</span> ${booking.email}</p>
+                                <p class="text-gray-300"><span class="font-medium">Phone:</span> ${booking.phone}</p>
+                                <p class="mt-2 text-sm text-gray-300">
+                                    Booked on: ${booking.timestamp ? new Date(booking.timestamp.toDate()).toLocaleString() : 'N/A'}
+                                </p>
+                            `;
                     bookingsListElem.appendChild(bookingDiv);
                 });
             }
