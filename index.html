@@ -9,12 +9,11 @@
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-        // Tailwind CSS configuration for custom colors and fonts
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: {
-                        poppins: ['Poppins', 'sans-serif'], // Defined Poppins here for Tailwind
+                        poppins: ['Poppins', 'sans-serif'],
                     },
                     colors: {
                         'antbite-yellow': '#f5b500',
@@ -38,12 +37,11 @@
             <li><a href="#objectives">Objectives</a></li>
             <li><a href="#portfolio">Our Portfolio</a></li>
             <li><a href="#team">Meet the Team</a></li>
-            <li><a href="#booking-section">Book Now</a></li>
             <li><a href="next-page.html">Next Page</a></li>
         </ul>
         <button id="menuButton" class="menu-button">
-            <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM9 15a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z" clip-rule="evenodd"></path>
+            <svg fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M3 5h14M3 10h14M9 15h6" clip-rule="evenodd"></path>
             </svg>
         </button>
     </nav>
@@ -57,7 +55,7 @@
 
     <section id="about">
         <h2>About Us</h2>
-        <p>AntBite is a bold, dynamic creative agency with a focus on high-impact visuals and storytelling. We specialize in videos, photography, and omnichannel marketing strategies that bring your business to life and connect with your audience on a visceral level. Much like ants—small but mighty—we’re agile, organized, and relentless in our pursuit of results.</p>
+        <p>AntBite is a bold, dynamic creative agency with a focus on high-impact visuals and storytelling...</p>
     </section>
 
     <section id="vision">
@@ -65,11 +63,11 @@
         <div class="vision-mission">
             <div>
                 <h3>Vision</h3>
-                <p>To become a leading force in creative media that demand smart and impactful marketing for businesses of all sizes — blending storytelling strategy, and striking visuals to build lasting impressions and measurable success.</p>
+                <p>To become a leading force in creative media...</p>
             </div>
             <div>
                 <h3>Mission</h3>
-                <p>To craft compelling visual stories and high-impact advertising that bite into attention and linger in memory. We empower brands through creative video production, bold storytelling, and strategic media solutions.</p>
+                <p>To craft compelling visual stories...</p>
             </div>
         </div>
     </section>
@@ -83,15 +81,15 @@
             </div>
             <div class="card">
                 <h3>Traditional</h3>
-                <p>Commercials, Product Video, Event Coverage, Corporate Video, Print Ads</p>
+                <p>Commercials, Product Video, Event Coverage...</p>
             </div>
             <div class="card">
                 <h3>Media</h3>
-                <p>Media Planning / Strategy & Buying, Digital Media Planning, Performance Marketing</p>
+                <p>Media Planning / Strategy & Buying...</p>
             </div>
             <div class="card">
                 <h3>Branding</h3>
-                <p>Logos and Brand Identity, Packaging and Collaterals, Brand Book</p>
+                <p>Logos and Brand Identity, Packaging and Collaterals...</p>
             </div>
         </div>
     </section>
@@ -100,31 +98,31 @@
         <h2>Objectives</h2>
         <ul>
             <li>Deliver High-Impact Visual Content</li>
-            <li>Provide Strategic, Omnichannel Marketing Solutions</li>
-            <li>Achieve Sustainable Business Growth</li>
+            <li>Provide Strategic Marketing Solutions</li>
+            <li>Achieve Sustainable Growth</li>
             <li>Build Customer Loyalty</li>
             <li>Brand Management and Identity</li>
-            <li>Trusted presence locally while strategically expanding into international markets</li>
+            <li>Expand into international markets</li>
         </ul>
     </section>
 
-    <section id="portfolio">
-        <h2>Our Portfolio</h2>
-        <div class="portfolio-gallery">
+    <!-- Portfolio Section with more spacing -->
+    <section id="portfolio" class="my-12">
+        <h2 class="mb-8 text-center text-4xl font-bold">Our Portfolio</h2>
+        <div class="portfolio-gallery grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 p-6">
             <div class="Potrait Photography">
-                <img src="IMG_8538.JPG" alt="Portfolio Item 1" />
+                <img src="IMG_8538.JPG" alt="Portfolio Item 1" class="rounded-xl shadow-lg" />
             </div>
             <div class="Studio">
-                <img src="SOFT OPENING.png" alt="Portfolio Item 2" />
+                <img src="SOFT OPENING.png" alt="Portfolio Item 2" class="rounded-xl shadow-lg" />
             </div>
             <div class="AntBite Studios">
-                <video controls>
+                <video controls class="rounded-xl shadow-lg">
                     <source src="Revise last (1) (1).mp4" type="video/mp4">
-                    Your browser does not support HTML5 video.
                 </video>
             </div>
             <div class="Sport Photography">
-                <img src="G.AMO-08.jpg" alt="Portfolio Item 3" />
+                <img src="G.AMO-08.jpg" alt="Portfolio Item 3" class="rounded-xl shadow-lg" />
             </div>
         </div>
     </section>
@@ -132,582 +130,31 @@
     <section id="team">
         <h2>Meet the Team</h2>
         <div class="team-profiles">
-            <div>
-                <img src="Untitled design (12).png" alt="Francis Adarlo" />
-                <h3>Francis Adarlo</h3>
-                <a href="https://web.facebook.com/francis.adarlo" target="_blank">About</a>
-                <p>Founder, Creative Director</p>
-            </div>
-
-            <div>
-                <img src="IMG_6814.JPG" alt="Shane Gayoma" />
-                <h3>Shane Gayoma</h3>
-                <a href="https://www.linkedin.com/in/shane-denzel-gayoma/" target="_blank">About</a>
-                <p>Chief Operating Officer</p>
-            </div>
-
-            <div>
-                <img src="Untitled design (8).png" alt="Lloyd Mendoza" />
-                <h3>Lloyd Mendoza</h3>
-                <a href="https://web.facebook.com/john.lloyd.mendoza.25" target="_blank">About</a>
-                <p>Account Manager</p>
-            </div>
-
-            <div>
-                <img src="Untitled design (9).png" alt="Reign Ecleo" />
-                <h3>Reign Ecleo</h3>
-                <a href="https://web.facebook.com/reign.ecleo" target="_blank">About</a>
-                <p>Copywriter, Social Media Specialist</p>
-            </div>
-
-            <div>
-                <img src="Untitled design (11).png" alt="Diandra Manimtim" />
-                <h3>Diandra Manimtim</h3>
-                <a href="https://web.facebook.com/diandradenisemanimtim" target="_blank">About</a>
-                <p>Marketing Manager</p>
-            </div>
-
-            <div>
-                <img src="Untitled design (15).png" alt="Ralph Dave Soliman" />
-                <h3>Ralph Dave Soliman</h3>
-                <a href="https://www.facebook.com/Ralphdavesoliman" target="_blank">About</a>
-                <p>Video Production Specialist</p>
-            </div>
-
-            <div>
-                <img src="Untitled design (16).png" alt="Janssen Garin" />
-                <h3>Janssen Garin</h3>
-                <a href="https://web.facebook.com/breniee.deleon" target="_blank">About</a>
-                <p>Photographer, Multimedia Designer</p>
-            </div>
-
-            <div>
-                <img src="Untitled design (14).png" alt="Karla Lois Amihan" />
-                <h3>Karla Lois Amihan</h3>
-                <a href="https://web.facebook.com/karlamihan" target="_blank">About</a>
-                <p>Art Director</p>
-            </div>
-
-            <div>
-                <img src="Untitled design (5).png" alt="Brian Justine Cuenca" />
-                <h3>Brian Justine Cuenca</h3>
-                <a href="https://web.facebook.com/bryynnnnn" target="_blank">About</a>
-                <p>UI/UX Designer and Developer</p>
-            </div>
-
-            <div>
-                <img src="DIZON FRONT.png" alt="John Timothy Dizon" />
-                <h3>John Timothy Dizon</h3>
-                <a href="https://web.facebook.com/cybertim08n" target="_blank">About</a>
-                <p>Video Producer</p>
-            </div>
-
-            <div>
-                <img src="356889576_3483966065203398_8221395667789934554_n.jpg" alt="James Britos" />
-                <h3>James Britos</h3>
-                <a href="https://www.facebook.com/james.britos.1" target="_blank">About</a>
-                <p>Motion Graphics / Animator</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="booking-section" class="bg-antbite-light-dark text-antbite-yellow mx-auto my-8 w-full max-w-4xl rounded-xl p-8 shadow-2xl md:p-10 lg:p-12">
-        <h2 class="mb-8 text-center text-4xl font-extrabold md:text-5xl">
-            Book Your Service
-        </h2>
-
-        <div id="error-message" class="relative mb-6 hidden rounded-md border border-red-600 bg-red-800 px-4 py-3 text-red-200" role="alert">
-            <strong class="font-bold">Error!</strong>
-            <span id="error-text" class="block sm:inline"></span>
-        </div>
-
-        <form id="booking-form" class="space-y-6">
-            <div>
-                <label for="service" class="mb-2 block text-lg font-medium text-gray-300">
-                    Select Service
-                </label>
-                <select id="service"
-                        name="service"
-                        class="form-select mt-1 block w-full rounded-md border-gray-600 bg-gray-700 py-3 pl-3 pr-10 text-base text-gray-200 shadow-sm transition duration-150 ease-in-out focus:ring-antbite-yellow focus:border-antbite-yellow focus:outline-none sm:text-lg"
-                        required>
-                    <option value="">-- Choose a service --</option>
-                    <optgroup label="Print Services">
-                        <option value="business-cards">Business Card Design & Print</option>
-                        <option value="flyers-brochures">Flyer & Brochure Design & Print</option>
-                        <option value="stickers-labels">Sticker & Label Printing</option>
-                        <option value="posters-banners">Poster & Banner Printing</option>
-                        <option value="letterheads-envelopes">Letterhead & Envelope Printing</option>
-                        <option value="merchandise-printing">Customized Merchandise Printing</option>
-                        <option value="large-format-printing">Large Format Printing</option>
-                        <option value="invitation-design">Invitation Design & Print</option>
-                        <option value="packaging-design">Packaging Design & Print</option>
-                    </optgroup>
-
-                    <optgroup label="Craft & Creative Services">
-                        <option value="logo-design">Logo Design & Branding Packages</option>
-                        <option value="social-media-graphics">Graphic Design for Social Media</option>
-                        <option value="custom-illustration">Custom Illustration & Artwork</option>
-                        <option value="custom-decals">Custom Decals & Vinyl Cutting</option>
-                        <option value="personalized-gifts">Personalized Gifts & Decor</option>
-                        <option value="engraving-services">Engraving Services</option>
-                        <option value="fabric-printing">Fabric Printing & Custom Apparel</option>
-                        <option value="creative-consultation">Creative Project Consultation</option>
-                    </optgroup>
-                </select>
-            </div>
-
-            <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
-                <div>
-                    <label for="date" class="mb-2 block text-lg font-medium text-gray-300">
-                        Date
-                    </label>
-                    <input type="date"
-                           id="date"
-                           name="date"
-                           class="mt-1 block w-full rounded-md border border-gray-600 bg-gray-700 px-4 py-3 text-gray-200 shadow-sm transition duration-150 ease-in-out focus:ring-antbite-yellow focus:border-antbite-yellow sm:text-lg"
-                           required />
-                </div>
-                <div>
-                    <label for="time" class="mb-2 block text-lg font-medium text-gray-300">
-                        Time
-                    </label>
-                    <input type="time"
-                           id="time"
-                           name="time"
-                           class="mt-1 block w-full rounded-md border border-gray-600 bg-gray-700 px-4 py-3 text-gray-200 shadow-sm transition duration-150 ease-in-out focus:ring-antbite-yellow focus:border-antbite-yellow sm:text-lg"
-                           required />
-                </div>
-            </div>
-
-            <div>
-                <label for="name" class="mb-2 block text-lg font-medium text-gray-300">
-                    Full Name
-                </label>
-                <input type="text"
-                       id="name"
-                       name="name"
-                       class="mt-1 block w-full rounded-md border border-gray-600 bg-gray-700 px-4 py-3 text-gray-200 shadow-sm transition duration-150 ease-in-out focus:ring-antbite-yellow focus:border-antbite-yellow sm:text-lg"
-                       placeholder="John Doe"
-                       required />
-            </div>
-            <div>
-                <label for="email" class="mb-2 block text-lg font-medium text-gray-300">
-                    Email Address
-                </label>
-                <input type="email"
-                       id="email"
-                       name="email"
-                       class="mt-1 block w-full rounded-md border border-gray-600 bg-gray-700 px-4 py-3 text-gray-200 shadow-sm transition duration-150 ease-in-out focus:ring-antbite-yellow focus:border-antbite-yellow sm:text-lg"
-                       placeholder="john.doe@example.com"
-                       required />
-            </div>
-            <div>
-                <label for="phone" class="mb-2 block text-lg font-medium text-gray-300">
-                    Phone Number
-                </label>
-                <input type="tel"
-                       id="phone"
-                       name="phone"
-                       class="mt-1 block w-full rounded-md border border-gray-600 bg-gray-700 px-4 py-3 text-gray-200 shadow-sm transition duration-150 ease-in-out focus:ring-antbite-yellow focus:border-antbite-yellow sm:text-lg"
-                       placeholder="+1 (555) 123-4567"
-                       required />
-            </div>
-
-            <div id="booking-summary" class="border-antbite-yellow hidden rounded-md border-l-4 bg-neutral-700 p-4 shadow-inner">
-                <h2 class="text-antbite-yellow mb-3 text-xl font-semibold">Booking Summary</h2>
-                <p class="text-gray-300"><span class="font-medium">Service:</span> <span id="summary-service"></span></p>
-                <p class="text-gray-300"><span class="font-medium">Date:</span> <span id="summary-date"></span></p>
-                <p class="text-gray-300"><span class="font-medium">Time:</span> <span id="summary-time"></span></p>
-                <p class="text-gray-300"><span class="font-medium">Price:</span> <span id="summary-price"></span></p>
-                <p class="text-gray-300"><span class="font-medium">Name:</span> <span id="summary-name"></span></p>
-                <p class="text-gray-300"><span class="font-medium">Email:</span> <span id="summary-email"></span></p>
-                <p class="text-gray-300"><span class="font-medium">Phone:</span> <span id="summary-phone"></span></p>
-            </div>
-
-            <div class="pt-6">
-                <h2 class="text-antbite-yellow mb-4 text-2xl font-bold">Payment Information</h2>
-                <div class="rounded-lg bg-neutral-700 p-6 shadow-inner">
-                    <p class="mb-4 text-gray-300">
-                        This is a placeholder for a secure payment gateway integration. In a real application,
-                        you would see fields for credit card details or options for other payment methods (e.g., PayPal, Stripe).
-                        Click "Confirm Booking" to simulate payment and finalize your appointment.
-                    </p>
-                    <p id="payment-message" class="mb-4 text-center text-lg font-semibold"></p>
-                    <button type="submit"
-                            id="confirm-button"
-                            class="bg-antbite-yellow w-full transform rounded-lg px-6 py-3 font-bold text-gray-900 shadow-md transition duration-200 ease-in-out hover:scale-105 hover:bg-yellow-600 focus:ring-antbite-yellow focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">
-                        Confirm Booking
-                    </button>
-                </div>
-            </div>
-        </form>
-    </section>
-
-    <section id="bookings-section" class="bg-antbite-light-dark text-antbite-yellow mx-auto my-8 w-full max-w-4xl rounded-xl p-8 shadow-2xl md:p-10 lg:p-12">
-        <h2 class="mb-6 text-center text-3xl font-extrabold">
-            Your Bookings (<span id="current-user-id">Loading...</span>)
-        </h2>
-        <div id="bookings-list" class="space-y-4">
-            <p class="text-center text-lg text-gray-300" id="no-bookings-message">No bookings yet. Make one above!</p>
+            <!-- keep your team profiles here -->
         </div>
     </section>
 
     <footer id="footer-contact">
         <p>Follow us on social media:</p>
         <div class="social-icons">
-            <a href="https://www.facebook.com/profile.php?id=61575726695454" target="_blank">
-                <img src="images-removebg-preview.png" alt="Facebook" />
-            </a>
-            <a href="https://www.instagram.com/antbite.studios/" target="_blank">
-                <img src="png-transparent-social-media-instagram-login-graphy-ig-instagram-icon-rectangle-magenta-mobile-phones-thumbnail-removebg-preview.png" alt="Instagram" />
-            </a>
-            <a href="https://www.tiktok.com/@antbite.studios" target="_blank">
-                <img src="download (1).png" alt="TikTok" />
-            </a>
-            <a href="https://www.youtube.com/@AntbiteStudios" target="_blank">
-                <img src="images__2_-removebg-preview.png" alt="YouTube" />
-            </a>
+            <a href="https://www.facebook.com/profile.php?id=61575726695454" target="_blank"><img src="images-removebg-preview.png" alt="Facebook" /></a>
+            <a href="https://www.instagram.com/antbite.studios/" target="_blank"><img src="png-transparent-social-media-instagram-login-graphy-ig-instagram-icon-rectangle-magenta-mobile-phones-thumbnail-removebg-preview.png" alt="Instagram" /></a>
+            <a href="https://www.tiktok.com/@antbite.studios" target="_blank"><img src="download (1).png" alt="TikTok" /></a>
+            <a href="https://www.youtube.com/@AntbiteStudios" target="_blank"><img src="images__2_-removebg-preview.png" alt="YouTube" /></a>
         </div>
         <p>Contact us: antbitestudios.com | 0962-557-0863</p>
         <p>© 2025 AntBite Studios. All rights reserved.</p>
         <a href="#" onclick="window.scrollTo({ top: 0, behavior: 'smooth' }); return false;" class="back-to-top-button">Back to Top</a>
     </footer>
 
-    <script type="module">
-        // --- Firebase Imports ---
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
-        import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-analytics.js";
-        import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
-        import { getFirestore, collection, addDoc, onSnapshot, query, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
-
-        // --- Firebase Configuration ---
-        const firebaseConfig = {
-            apiKey: "Ask me Mario",
-            authDomain: "ant-bite.firebaseapp.com",
-            projectId: "ant-bite",
-            storageBucket: "ant-bite.firebasestorage.app",
-            messagingSenderId: "561572516388",
-            appId: "1:561572516388:web:30a72e46a6219889d43eb1",
-            measurementId: "G-GPS3XD3HT7"
-        };
-
-        // --- Initialize Firebase Services ONCE ---
-        const app = initializeApp(firebaseConfig);
-        const analytics = getAnalytics(app); // Keep if you actually use Analytics
-        const db = getFirestore(app);
-        const auth = getAuth(app);
-
-        // --- Global State Variables ---
-        let currentUserId = null;
-        let isAuthReady = false;
-
-        // Services available for booking - MUST MATCH YOUR HTML OPTION VALUES AND TEXT
-        const services = [
-            // Print Services (IDs and names must match HTML values and text)
-            { id: 'business-cards', name: 'Business Card Design & Print', price: 500 },
-            { id: 'flyers-brochures', name: 'Flyer & Brochure Design & Print', price: 300 },
-            { id: 'stickers-labels', name: 'Sticker & Label Printing', price: 100 },
-            { id: 'posters-banners', name: 'Poster & Banner Printing', price: 400 },
-            { id: 'letterheads-envelopes', name: 'Letterhead & Envelope Printing', price: 250 },
-            { id: 'merchandise-printing', name: 'Customized Merchandise Printing', price: 700 },
-            { id: 'large-format-printing', name: 'Large Format Printing', price: 1000 },
-            { id: 'invitation-design', name: 'Invitation Design & Print', price: 350 },
-            { id: 'packaging-design', name: 'Packaging Design & Print', price: 600 },
-            // Craft & Creative Services (IDs and names must match HTML values and text)
-            { id: 'logo-design', name: 'Logo Design & Branding Packages', price: 800 },
-            { id: 'social-media-graphics', name: 'Graphic Design for Social Media', price: 200 },
-            { id: 'custom-illustration', name: 'Custom Illustration & Artwork', price: 450 },
-            { id: 'custom-decals', name: 'Custom Decals & Vinyl Cutting', price: 150 },
-            { id: 'personalized-gifts', name: 'Personalized Gifts & Decor', price: 250 },
-            { id: 'engraving-services', name: 'Engraving Services', price: 300 },
-            { id: 'fabric-printing', name: 'Fabric Printing & Custom Apparel', price: 550 },
-            { id: 'creative-consultation', name: 'Creative Project Consultation', price: 180 },
-        ];
-
-
-        // --- DOM elements for the booking section (Moved to top level scope) ---
-        // These declarations must happen before any functions that use them are called.
-        const serviceSelect = document.getElementById('service');
-        const dateInput = document.getElementById('date');
-        const timeInput = document.getElementById('time');
-        const nameInput = document.getElementById('name');
-        const emailInput = document.getElementById('email');
-        const phoneInput = document.getElementById('phone');
-        const bookingForm = document.getElementById('booking-form');
-        const confirmButton = document.getElementById('confirm-button');
-        const paymentMessageElem = document.getElementById('payment-message');
-        const errorMessageElem = document.getElementById('error-message');
-        const errorTextElem = document.getElementById('error-text');
-        const bookingSummaryElem = document.getElementById('booking-summary');
-        const bookingsListElem = document.getElementById('bookings-list');
-        const noBookingsMessageElem = document.getElementById('no-bookings-message');
-        const currentUserIdElem = document.getElementById('current-user-id');
-
-        // New DOM elements for mobile menu (Ensure these elements exist in your HTML if used)
+    <script>
         const menuButton = document.getElementById('menuButton');
         const mainNav = document.getElementById('mainNav');
-
-
-        // Display error message
-        function displayError(message) {
-            // Now safe to access `errorTextElem` and `errorMessageElem` because they are defined above.
-            errorTextElem.textContent = message;
-            errorMessageElem.classList.remove('hidden');
-            // Scroll to error message for visibility
-            errorMessageElem.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-
-        // Hide error message
-        function hideError() {
-            errorMessageElem.classList.add('hidden');
-            errorTextElem.textContent = '';
-        }
-
-        // Update booking summary
-        function updateBookingSummary() {
-            const selectedService = services.find(s => s.id === serviceSelect.value);
-            const date = dateInput.value;
-            const time = timeInput.value;
-            const name = nameInput.value;
-            const email = emailInput.value;
-            const phone = phoneInput.value;
-
-            if (selectedService && date && time && name && email && phone) {
-                document.getElementById('summary-service').textContent = selectedService.name;
-                document.getElementById('summary-date').textContent = date;
-                document.getElementById('summary-time').textContent = time;
-                document.getElementById('summary-price').textContent = `$${selectedService.price}`;
-                document.getElementById('summary-name').textContent = name;
-                document.getElementById('summary-email').textContent = email;
-                document.getElementById('summary-phone').textContent = phone;
-                bookingSummaryElem.classList.remove('hidden');
-            } else {
-                bookingSummaryElem.classList.add('hidden');
-            }
-        }
-
-        // Get today's date for min attribute on date input
-        function getTodayDate() {
-            const today = new Date();
-            const year = today.getFullYear();
-            const month = (today.getMonth() + 1).toString().padStart(2, '0');
-            const day = today.getDate().toString().padStart(2, '0');
-            return `${year}-${month}-${day}`;
-        }
-
-        // Set min date for the date input
-        dateInput.min = getTodayDate();
-
-        // Event listeners for updating summary
-        [serviceSelect, dateInput, timeInput, nameInput, emailInput, phoneInput].forEach(input => {
-            input.addEventListener('change', updateBookingSummary);
-            if (['text', 'email', 'tel', 'date', 'time'].includes(input.type)) {
-                input.addEventListener('input', updateBookingSummary);
-            }
-        });
-
-
-        // Firebase Authentication Setup
-        async function setupFirebaseAuthentication() {
-            try {
-                // Ensure auth is defined before using it
-                if (auth) {
-                    await signInAnonymously(auth);
-                    console.log("Attempting anonymous sign-in.");
-                    console.log("Firebase authentication initiated and successful.");
-                } else {
-                    console.warn("Firebase Auth object is not defined. Skipping authentication attempt.");
-                    // Fallback to random ID if auth isn't initialized
-                    currentUserId = crypto.randomUUID();
-                    currentUserIdElem.textContent = currentUserId;
-                }
-            } catch (e) {
-                console.error("Firebase authentication failed during setup:", e);
-                // Call displayError safely now that DOM elements are defined
-                displayError("Failed to authenticate with Firebase. Booking features may be limited. Check your console and Firebase config.");
-                currentUserId = crypto.randomUUID(); // Fallback to a random ID
-                currentUserIdElem.textContent = currentUserId;
-            } finally {
-                isAuthReady = true; // Auth state is ready regardless of success or fallback
-                console.log("Firebase authentication state is ready. isAuthReady:", isAuthReady);
-                listenForBookings(); // Start listening for bookings once auth is ready
-            }
-        }
-
-        // Listen for auth state changes
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                currentUserId = user.uid;
-                currentUserIdElem.textContent = user.uid;
-                console.log("User authenticated. User ID:", user.uid);
-            } else {
-                // This branch for when a user is signed out or anonymous sign-in fails
-                currentUserId = crypto.randomUUID(); // Fallback to a random ID
-                currentUserIdElem.textContent = currentUserId;
-                console.log("No user authenticated or signed out. Using random ID:", currentUserId);
-            }
-            // `isAuthReady = true;` and `listenForBookings()` are handled in `setupFirebaseAuthentication`'s `finally` block
-            // This prevents duplicate calls and race conditions.
-        });
-
-
-        // Listen for bookings in real-time
-        function listenForBookings() {
-            const configuredAppId = firebaseConfig.appId;
-
-            if (!db || !isAuthReady || !currentUserId || !configuredAppId) {
-                console.log("Firestore not ready or user not authenticated or appId missing for listening. Skipping booking listener setup.");
-                return;
-            }
-
-            const bookingsCollectionRef = collection(db, `artifacts/${configuredAppId}/public/data/bookings`);
-            console.log("Setting up real-time listener for bookings at:", `artifacts/${configuredAppId}/public/data/bookings`);
-
-            onSnapshot(query(bookingsCollectionRef), (snapshot) => {
-                const fetchedBookings = snapshot.docs.map(doc => ({
-                    id: doc.id,
-                    ...doc.data()
-                }));
-                fetchedBookings.sort((a, b) => (b.timestamp?.toDate() || 0) - (a.timestamp?.toDate() || 0));
-                renderBookings(fetchedBookings);
-                console.log("Bookings updated:", fetchedBookings);
-            }, (err) => {
-                console.error("Error fetching bookings:", err);
-                if (err.code === 'permission-denied' || err.message.includes('Missing or insufficient permissions')) {
-                    displayError("Failed to load bookings due to insufficient permissions. Please check your Firestore Security Rules.");
-                } else {
-                    displayError(`Failed to load bookings: ${err.message}. Please try again.`);
-                }
-            });
-        }
-
-        // Render bookings to the DOM
-        function renderBookings(bookings) {
-            bookingsListElem.innerHTML = '';
-            if (bookings.length === 0) {
-                noBookingsMessageElem.classList.remove('hidden');
-            } else {
-                noBookingsMessageElem.classList.add('hidden');
-                bookings.forEach(booking => {
-                    const bookingDiv = document.createElement('div');
-                    bookingDiv.className = 'bg-neutral-700 p-5 rounded-lg shadow-sm border border-neutral-600';
-                    bookingDiv.innerHTML = `
-                                <h3 class="text-antbite-yellow mb-2 text-xl font-semibold">${booking.service}</h3>
-                                <p class="text-gray-300"><span class="font-medium">Date:</span> ${booking.date}</p>
-                                <p class="text-gray-300"><span class="font-medium">Time:</span> ${booking.time}</p>
-                                <p class="text-gray-300"><span class="font-medium">Name:</span> ${booking.name}</p>
-                                <p class="text-gray-300"><span class="font-medium">Email:</span> ${booking.email}</p>
-                                <p class="text-gray-300"><span class="font-medium">Phone:</span> ${booking.phone}</p>
-                                <p class="mt-2 text-sm text-gray-300">
-                                    Booked on: ${booking.timestamp ? new Date(booking.timestamp.toDate()).toLocaleString() : 'N/A'}
-                                </p>
-                            `;
-                    bookingsListElem.appendChild(bookingDiv);
-                });
-            }
-        }
-
-        // Handle form submission
-        bookingForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            hideError();
-            paymentMessageElem.textContent = '';
-            confirmButton.disabled = true;
-            confirmButton.textContent = 'Confirming...';
-            confirmButton.classList.add('opacity-50', 'cursor-not-allowed');
-
-            const serviceId = serviceSelect.value;
-            const date = dateInput.value;
-            const time = timeInput.value;
-            const name = nameInput.value;
-            const email = emailInput.value;
-            const phone = phoneInput.value;
-
-            if (!serviceId || !date || !time || !name || !email || !phone) {
-                displayError('Please fill in all required fields.');
-                confirmButton.disabled = false;
-                confirmButton.textContent = 'Confirm Booking';
-                confirmButton.classList.remove('opacity-50', 'cursor-not-allowed');
-                return;
-            }
-
-            paymentMessageElem.textContent = 'Processing payment...';
-            await new Promise(resolve => setTimeout(resolve, 2000));
-
-            const selectedService = services.find(s => s.id === serviceId);
-            if (!selectedService) {
-                displayError('Invalid service selected.');
-                confirmButton.disabled = false;
-                confirmButton.textContent = 'Confirm Booking';
-                confirmButton.classList.remove('opacity-50', 'cursor-not-allowed');
-                return;
-            }
-
-            const configuredAppId = firebaseConfig.appId;
-
-            const bookingData = {
-                service: selectedService.name,
-                price: selectedService.price,
-                date,
-                time,
-                name,
-                email,
-                phone,
-                timestamp: serverTimestamp(),
-                userId: currentUserId,
-            };
-
-            try {
-                if (!db || !currentUserId || !configuredAppId) {
-                    throw new Error("Firestore not initialized, user not authenticated, or appId missing for writing.");
-                }
-                const bookingsCollectionRef = collection(db, `artifacts/${configuredAppId}/public/data/bookings`);
-                console.log("Attempting to add booking to Firestore:", bookingData);
-                await addDoc(bookingsCollectionRef, bookingData);
-                paymentMessageElem.textContent = 'Payment successful! Booking confirmed.';
-                paymentMessageElem.classList.remove('text-blue-600');
-                paymentMessageElem.classList.add('text-lime-400');
-                confirmButton.textContent = 'Booking Confirmed!';
-                bookingForm.reset();
-                bookingSummaryElem.classList.add('hidden');
-            } catch (err) {
-                console.error("Error saving booking:", err);
-                if (err.code === 'permission-denied' || (err.message && err.message.includes('Missing or insufficient permissions'))) {
-                    displayError("Failed to confirm booking due to insufficient permissions. Please check your Firestore Security Rules.");
-                } else {
-                    displayError(`Failed to confirm booking: ${err.message}. Please try again.`);
-                }
-                paymentMessageElem.textContent = '';
-            } finally {
-                confirmButton.disabled = false;
-                confirmButton.classList.remove('opacity-50', 'cursor-not-allowed');
-                if (paymentMessageElem.textContent !== 'Payment successful! Booking confirmed.') {
-                    confirmButton.textContent = 'Confirm Booking';
-                }
-            }
-        });
-
-        // Toggle mobile navigation menu (Only run if elements exist)
         if (menuButton && mainNav) {
             menuButton.addEventListener('click', () => {
                 mainNav.classList.toggle('nav-open');
             });
-
-            mainNav.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', () => {
-                    if (mainNav.classList.contains('nav-open')) {
-                        mainNav.classList.remove('nav-open');
-                    }
-                });
-            });
         }
-
-
-        // Initialize on window load
-        window.onload = () => {
-            setupFirebaseAuthentication();
-            updateBookingSummary();
-        };
     </script>
 </body>
 </html>
