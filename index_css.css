@@ -353,6 +353,40 @@ section {
         max-width: 250px;
     }
 
+/* Other Brands section */
+#other-brands {
+    background: rgba(38, 38, 38, 0.85);
+    padding: 80px 20px;
+    text-align: center;
+    max-width: 1200px;
+    margin: 0 auto 60px auto;
+    border-radius: 12px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+}
+
+.brand-logos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 40px;
+    margin-top: 40px;
+}
+
+    .brand-logos img {
+        width: 150px;
+        height: auto;
+        filter: grayscale(100%) brightness(1.5);
+        opacity: 0.6;
+        transition: filter 0.3s, opacity 0.3s;
+    }
+
+    .brand-logos img:hover {
+        filter: grayscale(0%) brightness(1);
+        opacity: 1;
+        transform: scale(1.1);
+    }
+
 /* Footer */
 footer {
     background: #111;
@@ -503,5 +537,3 @@ input[type="time"]::-webkit-calendar-picker-indicator {
         transform: translateY(0);
     }
 }
-
-</style >
